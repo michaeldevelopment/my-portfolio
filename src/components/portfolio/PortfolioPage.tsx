@@ -107,6 +107,22 @@ const SECTIONS = [
 function Nav() {
   const [active, setActive] = useState("work");
   const [scrolled, setScrolled] = useState(false);
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = saved ? saved === "dark" : prefersDark;
+    setDark(isDark);
+    document.documentElement.classList.toggle("dark", isDark);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    localStorage.setItem("theme", next ? "dark" : "light");
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -154,6 +170,13 @@ function Nav() {
         <a data-cta href="#contact" className="hidden md:inline-flex items-center gap-2 chip chip-red">
           Contact <ArrowUpRight className="h-3.5 w-3.5" />
         </a>
+        <button
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          className="ml-3 grid h-9 w-9 place-items-center border-2 border-[color:var(--foreground)] hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] transition-colors"
+        >
+          {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        </button>
       </div>
     </header>
   );
@@ -172,21 +195,23 @@ function Hero() {
             <span>/</span>
             Portfolio 2026
           </p>
-          <h1 className="reveal font-display text-[clamp(3.5rem,13vw,11rem)] leading-[0.82]">
-            Full Stack<br />
-            <span className="text-[color:var(--accent-red)]">AI Developer</span>
+          <h1 className="reveal font-display text-[clamp(2.5rem,9vw,7.5rem)] leading-[0.82]">
+            <span className="gl" data-t="Full Stack">Full Stack</span><br />
+            <span className="gl text-[color:var(--accent-red)]" data-t="AI Developer">AI Developer</span>
           </h1>
           <div className="reveal mt-10 flex flex-col md:flex-row gap-10 md:gap-16 items-start">
-            <p className="max-w-md text-lg md:text-xl font-bold uppercase leading-tight">
+            <p className="max-w-md text-sm md:text-base font-bold uppercase leading-tight">
               Building web apps that ship fast and hold up under real traffic — with AI in the loop.
             </p>
             <div className="flex flex-col gap-4">
-              <a data-cta href="#work" className="group inline-flex items-center gap-3 chip chip-solid hover:bg-[color:var(--accent-red)] hover:border-[color:var(--accent-red)] transition-colors">
-                Explore Projects
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
+              <a data-cta href="#work" className="btn-fill fill-red group inline-flex items-center gap-3 chip chip-solid">
+                <span className="inline-flex items-center gap-3">
+                  Explore Projects
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
+                </span>
               </a>
-              <a href="#" className="group inline-flex items-center gap-3 chip hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] transition-colors">
-                <Download className="h-3.5 w-3.5" /> Download CV
+              <a href="#" className="btn-fill fill-blue group inline-flex items-center gap-3 chip">
+                <span className="inline-flex items-center gap-3"><Download className="h-3.5 w-3.5" /> Download CV</span>
               </a>
             </div>
           </div>
@@ -270,8 +295,8 @@ function SectionHeader({ num, eyebrow, title, kicker }: { num: string; eyebrow: 
           <span className="chip chip-red !px-2 !py-1 !text-[10px]">{num}</span>
           {eyebrow}
         </div>
-        <h2 className="reveal mt-6 font-display text-[clamp(2.4rem,7vw,5.5rem)] leading-[0.88]">
-          {title}
+        <h2 className="reveal mt-6 font-display text-[clamp(1.75rem,4.8vw,3.75rem)] leading-[0.88]">
+          <span className="gl" data-t={title}>{title}</span>
         </h2>
       </div>
       {kicker && (
@@ -353,12 +378,12 @@ function Stack() {
         </div>
       </div>
 
-      <div className="reveal mt-16 overflow-hidden border-y-2 border-[color:var(--foreground)] py-6 bg-[color:var(--foreground)] text-[color:var(--background)]">
-        <div className="marquee-track flex gap-12 whitespace-nowrap font-display text-4xl md:text-6xl tracking-tight">
+      <div className="reveal mt-16 overflow-hidden border-y-2 border-[color:var(--foreground)] py-4 bg-[color:var(--foreground)] text-[color:var(--background)]">
+        <div className="marquee-track flex gap-8 whitespace-nowrap font-display text-xl md:text-2xl tracking-tight">
           {track.map((t, i) => (
-            <span key={i} className="inline-flex items-center gap-12">
+            <span key={i} className="inline-flex items-center gap-8">
               <span>{t}</span>
-              <span className="text-[color:var(--accent-red)]">■</span>
+              <span className="text-[color:var(--accent-cyan)]">■</span>
             </span>
           ))}
         </div>
@@ -554,8 +579,8 @@ function ProjectRow({ p, i }: { p: Project; i: number }) {
           </div>
           <div className="col-span-12 md:col-span-6 md:hard-r p-6 md:p-10 flex flex-col justify-between gap-6">
             <div>
-              <h3 className="font-display text-4xl md:text-7xl leading-[0.9]">
-                {p.name}
+              <h3 className="font-display text-3xl md:text-5xl leading-[0.9]">
+                <span className="gl" data-t={p.name}>{p.name}</span>
               </h3>
               {p.soon && (
                 <span className="mt-4 inline-flex items-center gap-2 chip chip-red !py-1">
@@ -729,19 +754,19 @@ function Contact() {
         <div className="reveal flex items-center gap-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--background)]">
           <span className="chip chip-red !px-2 !py-1 !text-[10px]">07</span> Contact
         </div>
-        <h2 className="reveal mt-8 font-display text-[clamp(2.8rem,10vw,9rem)] leading-[0.85]">
-          Ready For The<br />
-          <span className="text-[color:var(--accent-red)]">Next Iteration?</span>
+        <h2 className="reveal mt-8 font-display text-[clamp(2rem,6.5vw,5.5rem)] leading-[0.85]">
+          <span className="gl" data-t="Ready For The">Ready For The</span><br />
+          <span className="gl text-[color:var(--accent-red)]" data-t="Next Iteration?">Next Iteration?</span>
         </h2>
 
         <div className="reveal mt-14 grid grid-cols-12 gap-6 border-t-2 border-[color:var(--background)] pt-10">
           <div className="col-span-12 md:col-span-7 space-y-3">
             <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--background)]/60">Email</div>
-            <a data-cta href="mailto:hello@michael.dev" className="block font-display text-4xl md:text-7xl hover:text-[color:var(--accent-red)] transition-colors">
+            <a data-cta href="mailto:hello@michael.dev" className="block font-display text-3xl md:text-5xl hover:text-[color:var(--accent-red)] transition-colors">
               hello@michael.dev
             </a>
-            <a data-cta href="mailto:hello@michael.dev" className="mt-8 inline-flex items-center gap-3 chip chip-red text-lg !px-8 !py-4">
-              Get In Touch <ArrowUpRight className="h-4 w-4" />
+            <a data-cta href="mailto:hello@michael.dev" className="btn-fill fill-blue mt-8 inline-flex items-center gap-3 chip chip-red text-base !px-8 !py-4">
+              <span className="inline-flex items-center gap-3">Get In Touch <ArrowUpRight className="h-4 w-4" /></span>
             </a>
           </div>
           <div className="col-span-12 md:col-span-5 flex flex-col gap-3 justify-end font-mono text-[11px] font-bold uppercase tracking-[0.28em]">
@@ -768,22 +793,6 @@ function Contact() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="border-t-2 border-[color:var(--foreground)] py-6 bg-[color:var(--background)]">
-      <div className="mx-auto flex max-w-[1600px] flex-col md:flex-row items-center justify-between gap-3 px-6 md:px-8 font-mono text-[10px] font-bold uppercase tracking-[0.3em]">
-        <div>© {new Date().getFullYear()} Sanabria Studio</div>
-        <div>Built With Precision & TypeScript</div>
-        <div className="flex gap-4">
-          <a href="https://github.com/michaeldevelopment" target="_blank" rel="noreferrer" className="underline decoration-2 hover:text-[color:var(--accent-red)]">GH</a>
-          <a href="https://linkedin.com/in/michael-sanabria/" target="_blank" rel="noreferrer" className="underline decoration-2 hover:text-[color:var(--accent-red)]">LI</a>
-          <a href="https://behance.net/michaelsanabria2" target="_blank" rel="noreferrer" className="underline decoration-2 hover:text-[color:var(--accent-red)]">BE</a>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 /* ---------------- Page ---------------- */
 
 export function PortfolioPage() {
@@ -802,7 +811,6 @@ export function PortfolioPage() {
         <Certifications />
         <Contact />
       </main>
-      <Footer />
     </div>
   );
 }
