@@ -25,32 +25,29 @@ import wpJlo from "@/assets/wp-jlo.png";
 /* ---------------- Custom cursor ---------------- */
 
 function CustomCursor() {
-  const dot = useRef<HTMLDivElement>(null);
-  const ring = useRef<HTMLDivElement>(null);
+  const cursor = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (window.matchMedia("(max-width: 900px)").matches) return;
-    let rx = 0, ry = 0, tx = 0, ty = 0;
+    let cx = 0, cy = 0, tx = 0, ty = 0;
     const move = (e: MouseEvent) => {
       tx = e.clientX; ty = e.clientY;
-      if (dot.current) {
-        dot.current.style.transform = `translate(${tx}px, ${ty}px) translate(-50%,-50%)`;
-      }
     };
     const loop = () => {
-      rx += (tx - rx) * 0.75;
-      ry += (ty - ry) * 0.75;
-      if (ring.current) ring.current.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+      cx += (tx - cx) * 0.42;
+      cy += (ty - cy) * 0.42;
+      const el = cursor.current;
+      if (el) el.style.transform = `translate(${cx - el.offsetWidth / 2}px, ${cy - el.offsetHeight / 2}px)`;
       requestAnimationFrame(loop);
     };
     const enter = (e: Event) => {
       const t = e.target as HTMLElement;
-      if (!ring.current) return;
-      if (t.closest("[data-cta]")) ring.current.classList.add("is-cta");
-      else if (t.closest("a,button,[data-hover]")) ring.current.classList.add("is-hover");
+      if (!cursor.current) return;
+      if (t.closest("[data-cta]")) cursor.current.classList.add("is-cta");
+      else if (t.closest("a,button,[data-hover]")) cursor.current.classList.add("is-hover");
     };
     const leave = () => {
-      ring.current?.classList.remove("is-hover", "is-cta");
+      cursor.current?.classList.remove("is-hover", "is-cta");
     };
     window.addEventListener("mousemove", move);
     document.addEventListener("mouseover", enter);
@@ -66,8 +63,7 @@ function CustomCursor() {
 
   return (
     <>
-      <div ref={ring} className="cursor-ring" aria-hidden />
-      <div ref={dot} className="cursor-dot" aria-hidden />
+      <div ref={cursor} className="cursor-ring" aria-hidden />
     </>
   );
 }
