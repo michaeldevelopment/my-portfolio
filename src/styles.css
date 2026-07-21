@@ -18,6 +18,8 @@
   --primary-foreground: #ffffff;
   --primary-glow: rgba(0, 0, 0, 0.08);
   --accent-red: #E31B23;
+  --accent-blue: #2d5bff;
+  --accent-cyan: #5b9dff;
   --card: #ffffff;
   --card-foreground: #000000;
   --popover: #ffffff;
@@ -51,6 +53,32 @@
 
   --shadow-glow: 0 0 0 2px #000000;
   --shadow-card: 6px 6px 0 0 #000000;
+}
+
+/* Dark mode overrides */
+html.dark {
+  --background: #0a0a0c;
+  --surface: #0c0c14;
+  --surface-2: #12121c;
+  --foreground: #ffffff;
+  --muted-foreground: #8a8a99;
+  --border: #ffffff;
+  --border-strong: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #0a0a0c;
+  --card: #0c0c14;
+  --card-foreground: #ffffff;
+  --popover: #0c0c14;
+  --popover-foreground: #ffffff;
+  --secondary: #12121c;
+  --secondary-foreground: #ffffff;
+  --muted: #12121c;
+  --accent: #12121c;
+  --accent-foreground: #ffffff;
+  --input: #ffffff;
+  --ring: #ffffff;
+  --shadow-glow: 0 0 0 2px #ffffff;
+  --shadow-card: 6px 6px 0 0 #ffffff;
 }
 
 @theme inline {
@@ -130,6 +158,47 @@ body {
 }
 
 .font-display { font-family: var(--font-display); letter-spacing: -0.045em; font-weight: 900; text-transform: uppercase; }
+
+/* Cyberpunk glitch effect on titles */
+.gl { position: relative; display: inline-block; }
+.gl::before, .gl::after {
+  content: attr(data-t);
+  position: absolute; top: 0; left: 0; width: 100%;
+  opacity: 0; pointer-events: none;
+}
+.gl.on::before { color: var(--accent-red); animation: gl1 0.38s steps(2) 2; }
+.gl.on::after  { color: var(--accent-cyan); animation: gl2 0.38s steps(2) 2; }
+@keyframes gl1 {
+  0%, 100% { opacity: 0; transform: none; }
+  25% { opacity: 0.95; transform: translate(-5px, 3px); }
+  60% { opacity: 0.7; transform: translate(4px, -3px); }
+}
+@keyframes gl2 {
+  0%, 100% { opacity: 0; transform: none; }
+  30% { opacity: 0.9; transform: translate(5px, -3px); }
+  65% { opacity: 0.6; transform: translate(-4px, 3px); }
+}
+
+/* Fill button (background slides up on hover) */
+.btn-fill {
+  position: relative; overflow: hidden;
+  transition: color .3s ease;
+  isolation: isolate;
+}
+.btn-fill > * { position: relative; z-index: 2; }
+.btn-fill::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--foreground);
+  transform: translateY(101%);
+  transition: transform .45s cubic-bezier(0.7, 0, 0.3, 1);
+  z-index: 1;
+}
+.btn-fill:hover { color: var(--background); }
+.btn-fill:hover::before { transform: translateY(0); }
+.btn-fill.fill-red::before { background: var(--accent-red); }
+.btn-fill.fill-red:hover { color: #ffffff; }
+.btn-fill.fill-blue::before { background: var(--accent-blue); }
+.btn-fill.fill-blue:hover { color: #ffffff; }
 .font-mono    { font-family: var(--font-mono); }
 
 /* Reveal on scroll */
@@ -138,7 +207,7 @@ body {
 
 /* Marquee */
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee-track { animation: marquee 40s linear infinite; }
+.marquee-track { animation: marquee 18s linear infinite; }
 
 /* Grid overlay (subtle) */
 .grid-overlay::before {
