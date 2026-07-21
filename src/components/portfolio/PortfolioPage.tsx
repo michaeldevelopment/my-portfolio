@@ -38,8 +38,8 @@ function CustomCursor() {
       }
     };
     const loop = () => {
-      rx += (tx - rx) * 0.38;
-      ry += (ty - ry) * 0.38;
+      rx += (tx - rx) * 0.75;
+      ry += (ty - ry) * 0.75;
       if (ring.current) ring.current.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
       requestAnimationFrame(loop);
     };
