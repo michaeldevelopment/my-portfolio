@@ -149,7 +149,7 @@ body {
 }
 
 * {
-  border-color: var(--border);
+  border-color: var(--foreground);
 }
 
 ::selection {
@@ -222,9 +222,9 @@ body {
   position: fixed; top: 0; left: 0; pointer-events: none; z-index: 100; border-radius: 9999px;
   transform: translate(-50%, -50%); transition: transform .18s ease, background-color .2s ease, border-color .2s ease, width .2s ease, height .2s ease;
 }
-.cursor-dot  { width: 6px; height: 6px; background: #000000; border-radius: 0; }
-.cursor-ring { width: 28px; height: 28px; border: 2px solid #000000; border-radius: 0; }
-.cursor-ring.is-hover { width: 56px; height: 56px; border-color: #000000; background: transparent; }
+.cursor-dot  { width: 6px; height: 6px; background: var(--foreground); border-radius: 0; }
+.cursor-ring { width: 28px; height: 28px; border: 2px solid var(--accent-cyan); border-radius: 0; }
+.cursor-ring.is-hover { width: 46px; height: 46px; border-color: var(--accent-blue); background: rgba(45,91,255,.09); }
 .cursor-ring.is-cta   { width: 72px; height: 72px; border-color: var(--accent-red); background: rgba(227,27,35,.08); }
 
 @media (max-width: 900px) { .cursor-dot, .cursor-ring { display: none; } }
@@ -236,20 +236,18 @@ body {
 
 /* Browser chrome mockup (brutalist) */
 .browser-chrome {
-  border: 2px solid #000000;
-  border-radius: 0;
-  background: #ffffff;
-  overflow: hidden;
-  box-shadow: 8px 8px 0 0 #000000;
+  border: 2px solid var(--foreground); border-radius: 0;
+  background: var(--background); overflow: hidden;
+  box-shadow: 8px 8px 0 0 var(--foreground);
 }
 .browser-chrome-bar {
   display: flex; align-items: center; gap: 8px;
-  padding: 10px 14px; background: #f4f4f4; border-bottom: 2px solid #000000;
+  padding: 10px 14px; background: var(--surface); border-bottom: 2px solid var(--foreground);
 }
-.browser-chrome-dot { width: 10px; height: 10px; border-radius: 0; background: #000000; }
+.browser-chrome-dot { width: 10px; height: 10px; border-radius: 0; background: var(--foreground); }
 .browser-chrome-url {
   margin-left: 10px; flex: 1; font-family: var(--font-mono); font-size: 11px; font-weight: 700;
-  color: #000000; background: #ffffff; border: 2px solid #000000;
+  color: var(--foreground); background: var(--background); border: 2px solid var(--foreground);
   border-radius: 0; padding: 4px 12px; text-align: center; letter-spacing: .05em; text-transform: uppercase;
 }
 
@@ -283,23 +281,24 @@ a, button { cursor: none; }
 }
 
 /* Swiss helpers */
-.rule { display: block; height: 2px; background: #000000; }
+.rule { display: block; height: 2px; background: var(--foreground); }
 .italic-serif { font-style: italic; }
 .editorial-grayscale { filter: grayscale(1) contrast(1.05); transition: filter .5s ease, transform .5s ease; }
 .editorial-grayscale:hover { filter: grayscale(0) contrast(1); }
 
 /* Hard border utilities */
-.hard-b   { border-bottom: 2px solid #000000; }
-.hard-t   { border-top: 2px solid #000000; }
-.hard-r   { border-right: 2px solid #000000; }
-.hard-l   { border-left: 2px solid #000000; }
-.hard-all { border: 2px solid #000000; }
+.hard-b   { border-bottom: 2px solid var(--foreground); }
+.hard-t   { border-top: 2px solid var(--foreground); }
+.hard-r   { border-right: 2px solid var(--foreground); }
+.hard-l   { border-left: 2px solid var(--foreground); }
+.hard-all { border: 2px solid var(--foreground); }
 
 /* Chip */
 .chip {
   display: inline-flex; align-items: center; padding: 8px 14px;
-  border: 2px solid #000000; font-weight: 800; text-transform: uppercase;
-  font-size: 12px; letter-spacing: 0.06em; background: #ffffff; color: #000000;
+  border: 2px solid var(--foreground); font-weight: 800; text-transform: uppercase;
+  font-size: 12px; letter-spacing: 0.06em; background: var(--background); color: var(--foreground);
 }
-.chip.chip-solid { background: #000000; color: #ffffff; }
+.chip.chip-solid { background: var(--foreground); color: var(--background); }
 .chip.chip-red   { background: var(--accent-red); color: #ffffff; border-color: var(--accent-red); }
+.chip.chip-blue  { background: var(--accent-blue); color: #ffffff; border-color: var(--accent-blue); }
