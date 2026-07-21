@@ -93,6 +93,42 @@ function useReveal() {
   }, []);
 }
 
+function useGlitch() {
+  useEffect(() => {
+    const fire = (g: Element) => {
+      g.classList.add("on");
+      setTimeout(() => g.classList.remove("on"), 850);
+    };
+    const els = Array.from(document.querySelectorAll<HTMLElement>(".gl"));
+    const onEnter = (e: Event) => fire(e.currentTarget as Element);
+    els.forEach((el) => el.addEventListener("mouseenter", onEnter));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            fire(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.4 },
+    );
+    els.forEach((el) => io.observe(el));
+    const interval = window.setInterval(() => {
+      const visible = els.filter((g) => {
+        const r = g.getBoundingClientRect();
+        return r.top > 0 && r.bottom < window.innerHeight;
+      });
+      if (visible.length) fire(visible[Math.floor(Math.random() * visible.length)]);
+    }, 2600);
+    return () => {
+      els.forEach((el) => el.removeEventListener("mouseenter", onEnter));
+      io.disconnect();
+      window.clearInterval(interval);
+    };
+  }, []);
+}
+
 /* ---------------- Nav ---------------- */
 
 const SECTIONS = [
@@ -797,6 +833,7 @@ function Contact() {
 
 export function PortfolioPage() {
   useReveal();
+  useGlitch();
   return (
     <div className="relative min-h-screen bg-[color:var(--background)] text-[color:var(--foreground)]">
       <CustomCursor />
