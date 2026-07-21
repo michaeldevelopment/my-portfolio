@@ -9,6 +9,8 @@ import {
   Plus,
   Minus,
   MapPin,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 import heroImg from "@/assets/hero-centerpiece.jpg";
@@ -36,8 +38,8 @@ function CustomCursor() {
       }
     };
     const loop = () => {
-      rx += (tx - rx) * 0.18;
-      ry += (ty - ry) * 0.18;
+      rx += (tx - rx) * 0.38;
+      ry += (ty - ry) * 0.38;
       if (ring.current) ring.current.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
       requestAnimationFrame(loop);
     };
