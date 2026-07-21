@@ -130,36 +130,27 @@ function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "backdrop-blur-md bg-[#fbfbf9]/80 border-b border-[color:var(--border)]" : ""
+      className={`fixed inset-x-0 top-0 z-50 bg-[color:var(--background)] border-b-2 border-[color:var(--foreground)] transition-shadow ${
+        scrolled ? "shadow-[0_2px_0_0_#000000]" : ""
       }`}
     >
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 md:px-10">
-        <a href="#top" className="flex items-baseline gap-3">
-          <span className="font-display text-2xl italic leading-none">Michael Sanabria</span>
-          <span className="hidden sm:inline font-mono text-[10px] uppercase tracking-[0.3em] text-[color:var(--muted-foreground)]">MS · '26</span>
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-4 md:px-8">
+        <a href="#top" className="font-display text-xl md:text-2xl leading-none tracking-tighter">
+          Michael Sanabria<span className="text-[color:var(--accent-red)]">.</span>
         </a>
-        <nav className="hidden md:flex items-center gap-7 font-mono text-[11px] uppercase tracking-[0.24em] text-[color:var(--muted-foreground)]">
+        <nav className="hidden md:flex items-center gap-7 font-mono text-[11px] font-bold uppercase tracking-[0.2em]">
           {SECTIONS.map((s) => (
             <a
               key={s.id}
               href={`#${s.id}`}
-              className={`nav-link transition-colors hover:text-[color:var(--foreground)] ${active === s.id ? "active text-[color:var(--foreground)]" : ""}`}
+              className={`nav-link transition-colors ${active === s.id ? "active text-[color:var(--accent-red)]" : "hover:text-[color:var(--accent-red)]"}`}
             >
-              <span className="mr-1 text-[color:var(--muted-foreground)]/60">{s.num}</span>
               {s.label}
             </a>
           ))}
         </nav>
-        <a
-          data-cta
-          href="#contact"
-          className="group hidden md:inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.24em] text-[color:var(--foreground)]"
-        >
-          <span className="grid h-9 w-9 place-items-center rounded-full border border-[color:var(--border-strong)] transition-all group-hover:bg-[color:var(--foreground)] group-hover:text-[color:var(--background)]">
-            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
-          </span>
-          Start a project
+        <a data-cta href="#contact" className="hidden md:inline-flex items-center gap-2 chip chip-red">
+          Contact <ArrowUpRight className="h-3.5 w-3.5" />
         </a>
       </div>
     </header>
@@ -777,10 +768,15 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="border-t border-[color:var(--border)] py-10">
-      <div className="mx-auto flex max-w-[1400px] flex-col md:flex-row items-center justify-between gap-4 px-6 md:px-10 font-mono text-[10px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
-        <div>© {new Date().getFullYear()} Michael Sanabria — Built with React & TanStack Start</div>
-        <div>Medellín · Colombia</div>
+    <footer className="border-t-2 border-[color:var(--foreground)] py-6 bg-[color:var(--background)]">
+      <div className="mx-auto flex max-w-[1600px] flex-col md:flex-row items-center justify-between gap-3 px-6 md:px-8 font-mono text-[10px] font-bold uppercase tracking-[0.3em]">
+        <div>© {new Date().getFullYear()} Sanabria Studio</div>
+        <div>Built With Precision & TypeScript</div>
+        <div className="flex gap-4">
+          <a href="https://github.com/michaeldevelopment" target="_blank" rel="noreferrer" className="underline decoration-2 hover:text-[color:var(--accent-red)]">GH</a>
+          <a href="https://linkedin.com/in/michael-sanabria/" target="_blank" rel="noreferrer" className="underline decoration-2 hover:text-[color:var(--accent-red)]">LI</a>
+          <a href="https://behance.net/michaelsanabria2" target="_blank" rel="noreferrer" className="underline decoration-2 hover:text-[color:var(--accent-red)]">BE</a>
+        </div>
       </div>
     </footer>
   );
@@ -791,7 +787,7 @@ function Footer() {
 export function PortfolioPage() {
   useReveal();
   return (
-    <div className="grain relative min-h-screen bg-[color:var(--background)] text-[color:var(--foreground)]">
+    <div className="relative min-h-screen bg-[color:var(--background)] text-[color:var(--foreground)]">
       <CustomCursor />
       <Nav />
       <main>
