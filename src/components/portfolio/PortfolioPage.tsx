@@ -170,79 +170,66 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-36 pb-16 md:pt-44 md:pb-24">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <div className="grid grid-cols-12 gap-8 items-end">
-          <div className="col-span-12 lg:col-span-8">
-            <p className="reveal font-mono text-[10px] uppercase tracking-[0.4em] text-[color:var(--muted-foreground)] mb-8 flex items-center gap-3">
-              <span className="w-12 h-px bg-[color:var(--border-strong)]" />
-              Full Stack AI JS/TS Developer
-              <span className="text-[color:var(--muted-foreground)]/60">/</span>
-              Portfolio 2026
+    <section id="top" className="relative overflow-hidden pt-28 md:pt-32 hard-b">
+      <div className="grid grid-cols-12">
+        <div className="col-span-12 lg:col-span-9 px-6 md:px-10 py-16 md:py-24 lg:hard-r">
+          <p className="reveal font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--foreground)] mb-8 flex items-center gap-3">
+            <span className="w-10 h-[2px] bg-[color:var(--foreground)]" />
+            Full Stack AI JS/TS Developer
+            <span>/</span>
+            Portfolio 2026
+          </p>
+          <h1 className="reveal font-display text-[clamp(3.5rem,13vw,11rem)] leading-[0.82]">
+            Full Stack<br />
+            <span className="text-[color:var(--accent-red)]">AI Developer</span>
+          </h1>
+          <div className="reveal mt-10 flex flex-col md:flex-row gap-10 md:gap-16 items-start">
+            <p className="max-w-md text-lg md:text-xl font-bold uppercase leading-tight">
+              Building web apps that ship fast and hold up under real traffic — with AI in the loop.
             </p>
-            <h1 className="reveal font-display text-[clamp(4.5rem,14vw,11rem)] leading-[0.82] tracking-tight text-[color:var(--foreground)]">
-              Michael <br />
-              <span className="italic ml-[0.2em] relative">
-                Sanabria
-                <svg className="absolute -bottom-2 left-0 w-full h-1 text-[color:var(--foreground)]/10" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden>
-                  <path d="M0 5 Q 25 0, 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                </svg>
-              </span>
-            </h1>
-
-            <div className="reveal mt-12 flex flex-col md:flex-row gap-12 md:gap-20 items-start">
-              <p className="max-w-sm text-xl md:text-2xl text-[color:var(--foreground)]/85 leading-snug font-light tracking-tight">
-                Crafting <span className="font-semibold italic underline decoration-[color:var(--border-strong)] underline-offset-8">exceptional</span> web apps that ship fast and hold up under real traffic — with AI in the loop.
-              </p>
-              <div className="flex flex-col gap-5">
-                <a
-                  data-cta
-                  href="#work"
-                  className="group inline-flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.28em]"
-                >
-                  <span className="grid h-11 w-11 place-items-center rounded-full border border-[color:var(--border-strong)] transition-all duration-500 group-hover:bg-[color:var(--foreground)] group-hover:text-[color:var(--background)]">
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
-                  </span>
-                  Explore projects
-                </a>
-                <a href="#" className="group inline-flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)] hover:text-[color:var(--foreground)]">
-                  <span className="grid h-11 w-11 place-items-center rounded-full border border-[color:var(--border)]">
-                    <Download className="h-3.5 w-3.5" />
-                  </span>
-                  Download CV
-                </a>
-                <div className="mt-2 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
-                  <MapPin className="h-3 w-3" />
-                  Medellín, Colombia
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="reveal col-span-12 lg:col-span-4 mt-12 lg:mt-0">
-            <div className="relative aspect-[3/4] w-full overflow-hidden bg-[color:var(--surface)] shadow-[var(--shadow-card)]">
-              <img
-                src={heroImg}
-                alt="Editorial portrait of a code and interface composition"
-                className="h-full w-full object-cover editorial-grayscale scale-[1.05] hover:scale-100"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#121212]/40 to-transparent opacity-60" />
-              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-[#fbfbf9]">
-                <span className="font-mono text-[10px] uppercase tracking-[0.28em]">System Design / 003</span>
-                <span className="font-display italic text-lg">MS</span>
-              </div>
+            <div className="flex flex-col gap-4">
+              <a data-cta href="#work" className="group inline-flex items-center gap-3 chip chip-solid hover:bg-[color:var(--accent-red)] hover:border-[color:var(--accent-red)] transition-colors">
+                Explore Projects
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
+              </a>
+              <a href="#" className="group inline-flex items-center gap-3 chip hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] transition-colors">
+                <Download className="h-3.5 w-3.5" /> Download CV
+              </a>
             </div>
           </div>
         </div>
 
-        <div className="reveal mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-[color:var(--border)] pt-10">
-          <Stat value={3} suffix="+" label="Years shipping" />
-          <Stat value={15} suffix="+" label="Projects" />
-          <Stat value={95} suffix="%" label="Test coverage" />
-          <div>
-            <div className="font-display text-4xl">Available</div>
-            <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">Q1 · 2026</div>
+        <div className="col-span-12 lg:col-span-3 flex flex-col justify-between">
+          <div className="reveal p-6 md:p-8 hard-b flex flex-col gap-6">
+            <div>
+              <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)] mb-2">Location</div>
+              <div className="font-display text-2xl leading-none flex items-center gap-2"><MapPin className="h-5 w-5" /> Medellín</div>
+              <div className="font-mono text-[11px] font-bold uppercase mt-1">Colombia · UTC−5</div>
+            </div>
+            <div>
+              <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)] mb-2">Status</div>
+              <div className="inline-flex items-center gap-2 chip chip-red">
+                <span className="h-2 w-2 bg-white animate-pulse" /> Available Q1 · 2026
+              </div>
+            </div>
           </div>
+          <div className="reveal relative aspect-square lg:aspect-auto lg:flex-1 overflow-hidden bg-[color:var(--surface)]">
+            <img src={heroImg} alt="System design composition" className="h-full w-full object-cover editorial-grayscale" />
+            <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-white font-mono text-[10px] font-bold uppercase tracking-[0.2em]">
+              <span>MS · System / 003</span>
+              <span>'26</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="reveal grid grid-cols-2 md:grid-cols-4 hard-t">
+        <div className="p-6 md:p-8 hard-r"><Stat value={3} suffix="+" label="Years shipping" /></div>
+        <div className="p-6 md:p-8 md:hard-r"><Stat value={15} suffix="+" label="Projects" /></div>
+        <div className="p-6 md:p-8 hard-r"><Stat value={95} suffix="%" label="Test coverage" /></div>
+        <div className="p-6 md:p-8">
+          <div className="font-display text-3xl md:text-4xl">Enterprise</div>
+          <div className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)]">EPAM · Globant</div>
         </div>
       </div>
     </section>
@@ -271,11 +258,11 @@ function Stat({ value, suffix, label }: { value: number; suffix?: string; label:
   }, [value]);
   return (
     <div>
-      <div className="font-display text-4xl">
+      <div className="font-display text-4xl md:text-5xl">
         <span ref={ref}>0</span>
         {suffix}
       </div>
-      <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">{label}</div>
+      <div className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">{label}</div>
     </div>
   );
 }
@@ -284,19 +271,18 @@ function Stat({ value, suffix, label }: { value: number; suffix?: string; label:
 
 function SectionHeader({ num, eyebrow, title, kicker }: { num: string; eyebrow: string; title: string; kicker?: string }) {
   return (
-    <div className="mb-16 grid grid-cols-12 gap-8 items-end border-t border-[color:var(--border)] pt-10">
+    <div className="mb-12 md:mb-16 grid grid-cols-12 gap-6 md:gap-8 items-end border-t-2 border-[color:var(--foreground)] pt-8">
       <div className="col-span-12 md:col-span-8">
-        <div className="reveal flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.4em] text-[color:var(--muted-foreground)]">
-          <span>{num}</span>
-          <span className="w-8 h-px bg-[color:var(--border-strong)]" />
+        <div className="reveal flex items-center gap-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em]">
+          <span className="chip chip-red !px-2 !py-1 !text-[10px]">{num}</span>
           {eyebrow}
         </div>
-        <h2 className="reveal mt-6 font-display text-[clamp(2.4rem,7vw,5.5rem)] leading-[0.9]">
+        <h2 className="reveal mt-6 font-display text-[clamp(2.4rem,7vw,5.5rem)] leading-[0.88]">
           {title}
         </h2>
       </div>
       {kicker && (
-        <p className="reveal col-span-12 md:col-span-4 max-w-sm text-base text-[color:var(--muted-foreground)] leading-relaxed italic-serif text-lg">
+        <p className="reveal col-span-12 md:col-span-4 max-w-sm text-base md:text-lg font-bold uppercase leading-tight">
           {kicker}
         </p>
       )}
@@ -308,29 +294,29 @@ function SectionHeader({ num, eyebrow, title, kicker }: { num: string; eyebrow: 
 
 function About() {
   const bullets = [
-    { label: "Mechatronics roots" },
-    { label: "Full stack shipper" },
-    { label: "AI-native workflows" },
-    { label: "Ships under load" },
+    "Mechatronics roots",
+    "Full stack shipper",
+    "AI-native workflows",
+    "Ships under load",
   ];
   return (
-    <section id="about" className="relative py-24 md:py-32">
+    <section id="about" className="relative py-20 md:py-28">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="02" eyebrow="About" title="From mechatronics — to full stack." />
-        <div className="grid grid-cols-12 gap-8 items-start">
-          <p className="reveal col-span-12 md:col-span-8 font-display text-3xl md:text-5xl leading-[1.1] tracking-tight">
-            Engineer at heart. I care more about <span className="italic">what's happening under the hood</span> than which library gets the credit.
+        <SectionHeader num="02" eyebrow="About" title="From Mechatronics — To Full Stack." />
+        <div className="grid grid-cols-12 gap-6 hard-all">
+          <p className="reveal col-span-12 md:col-span-8 p-8 md:p-12 md:hard-r font-display text-2xl md:text-4xl leading-[1.05]">
+            Engineer at heart. I care more about <span className="text-[color:var(--accent-red)]">what's happening under the hood</span> than which library gets the credit.
           </p>
-          <div className="reveal col-span-12 md:col-span-4 space-y-4">
+          <ul className="reveal col-span-12 md:col-span-4">
             {bullets.map((b, i) => (
-              <div key={b.label} className="flex items-baseline gap-4 border-b border-[color:var(--border)] pb-3">
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[color:var(--muted-foreground)]">
+              <li key={b} className={`flex items-baseline gap-4 px-6 py-5 ${i < bullets.length - 1 ? "hard-b" : ""}`}>
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--accent-red)]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="text-lg text-[color:var(--foreground)]">{b.label}</span>
-              </div>
+                <span className="text-base font-bold uppercase">{b}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
@@ -349,40 +335,37 @@ const STACK: Record<string, string[]> = {
 
 function Stack() {
   const marquee = Object.values(STACK).flat();
-  const track = [...marquee, ...marquee];
+  const track = [...marquee, ...marquee, ...marquee];
   return (
-    <section id="stack" className="relative py-24 md:py-32 bg-[color:var(--surface)]">
+    <section id="stack" className="relative py-20 md:py-28 bg-[color:var(--surface)]">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="03" eyebrow="Stack" title="Tools I reach for." kicker="Pragmatic, JS/TS-heavy, with AI in the loop." />
+        <SectionHeader num="03" eyebrow="Stack" title="Core Stack." kicker="Pragmatic, JS/TS-heavy, AI in the loop." />
 
-        <div className="reveal grid grid-cols-12 gap-x-8 gap-y-10">
+        <div className="reveal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 hard-all">
           {Object.entries(STACK).map(([group, items], gi) => (
-            <div key={group} className="col-span-12 md:col-span-6 lg:col-span-4">
-              <div className="flex items-baseline justify-between border-b border-[color:var(--border-strong)] pb-3">
-                <div className="font-display text-2xl italic">{group}</div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
-                  {String(gi + 1).padStart(2, "0")} / {String(Object.keys(STACK).length).padStart(2, "0")}
+            <div key={group} className={`p-6 md:p-8 ${gi % 3 !== 2 ? "lg:hard-r" : ""} ${gi % 2 !== 1 ? "md:hard-r lg:[&]:hard-r" : ""} hard-b`}>
+              <div className="flex items-baseline justify-between mb-5">
+                <div className="font-display text-xl md:text-2xl">{group}</div>
+                <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
+                  {String(gi + 1).padStart(2, "0")}/{String(Object.keys(STACK).length).padStart(2, "0")}
                 </div>
               </div>
-              <ul className="mt-4 space-y-2">
-                {items.map((it) => (
-                  <li key={it} className="flex items-baseline gap-3 text-[color:var(--foreground)]/85">
-                    <span className="font-mono text-[9px] text-[color:var(--muted-foreground)]">◆</span>
-                    <span className="text-base">{it}</span>
-                  </li>
+              <div className="flex flex-wrap gap-2">
+                {items.map((it, ii) => (
+                  <span key={it} className={`chip ${ii === 0 ? "chip-solid" : ""}`}>{it}</span>
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="reveal mt-20 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)] border-y border-[color:var(--border)] py-6">
-        <div className="marquee-track flex gap-10 whitespace-nowrap font-display italic text-5xl md:text-7xl text-[color:var(--foreground)]/15 tracking-tight">
+      <div className="reveal mt-16 overflow-hidden border-y-2 border-[color:var(--foreground)] py-6 bg-[color:var(--foreground)] text-[color:var(--background)]">
+        <div className="marquee-track flex gap-12 whitespace-nowrap font-display text-4xl md:text-6xl tracking-tight">
           {track.map((t, i) => (
-            <span key={i} className="inline-flex items-center gap-10">
+            <span key={i} className="inline-flex items-center gap-12">
               <span>{t}</span>
-              <span className="text-[color:var(--accent-red)]/50 not-italic">◆</span>
+              <span className="text-[color:var(--accent-red)]">■</span>
             </span>
           ))}
         </div>
@@ -462,39 +445,39 @@ const EXPERIENCE: Exp[] = [
 function Experience() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="experience" className="relative py-24 md:py-32">
+    <section id="experience" className="relative py-20 md:py-28">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="04" eyebrow="Experience" title="Timeline." kicker="Enterprise consulting × personal products." />
+        <SectionHeader num="04" eyebrow="Experience" title="Timeline." kicker="Enterprise × personal products." />
 
-        <ol className="border-t border-[color:var(--border-strong)]">
+        <ol className="border-t-2 border-[color:var(--foreground)]">
           {EXPERIENCE.map((exp, i) => {
             const isOpen = open === i;
             return (
-              <li key={exp.role + exp.dates} className="reveal border-b border-[color:var(--border)]">
+              <li key={exp.role + exp.dates} className="reveal hard-b">
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="group grid w-full grid-cols-12 items-baseline gap-6 py-8 text-left transition-colors hover:bg-[color:var(--surface)]/60"
+                  className="group grid w-full grid-cols-12 items-baseline gap-4 md:gap-6 py-7 md:py-9 text-left transition-colors hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] px-2 md:px-4"
                 >
-                  <div className="col-span-12 md:col-span-2 font-mono text-[10px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
+                  <div className="col-span-12 md:col-span-2 font-mono text-[10px] font-bold uppercase tracking-[0.28em]">
                     {exp.dates}
                   </div>
-                  <div className="col-span-12 md:col-span-7">
-                    <div className="font-display text-2xl md:text-4xl leading-[1.05]">
+                  <div className="col-span-12 md:col-span-8">
+                    <div className="font-display text-xl md:text-3xl leading-[1.02]">
                       {exp.role}
-                      <span className="italic text-[color:var(--muted-foreground)]"> — {exp.company}</span>
+                      <span className="text-[color:var(--accent-red)] group-hover:text-white"> — {exp.company}</span>
                     </div>
-                    <div className="mt-2 text-sm text-[color:var(--muted-foreground)]">{exp.short}</div>
+                    <div className="mt-2 text-sm font-bold uppercase opacity-70">{exp.short}</div>
                     <div
                       className="grid transition-all duration-500"
                       style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                     >
                       <div className="overflow-hidden">
-                        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[color:var(--foreground)]/80">{exp.detail}</p>
+                        <p className="mt-4 max-w-2xl text-sm leading-relaxed opacity-90">{exp.detail}</p>
                       </div>
                     </div>
                   </div>
-                  <div className="col-span-12 md:col-span-3 flex md:justify-end">
-                    <span className="grid h-10 w-10 place-items-center rounded-full border border-[color:var(--border-strong)] text-[color:var(--foreground)]">
+                  <div className="col-span-12 md:col-span-2 flex md:justify-end">
+                    <span className="grid h-11 w-11 place-items-center border-2 border-current">
                       {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                     </span>
                   </div>
@@ -561,49 +544,46 @@ const PROJECTS: Project[] = [
 function ProjectRow({ p, i }: { p: Project; i: number }) {
   const wrapper = (children: React.ReactNode) =>
     p.href ? (
-      <a href={p.href} target="_blank" rel="noreferrer" className="block group">{children}</a>
+      <a href={p.href} target="_blank" rel="noreferrer" className="block group cursor-pointer">{children}</a>
     ) : (
       <div className="group">{children}</div>
     );
 
   return (
-    <li className="reveal border-b border-[color:var(--border)]">
+    <li className="reveal hard-b">
       {wrapper(
-        <div className="relative grid grid-cols-12 items-center gap-6 py-8 md:py-10 transition-colors">
-          <div className="col-span-2 md:col-span-1 font-mono text-[10px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
-            {String(i + 1).padStart(2, "0")}
+        <div className="relative grid grid-cols-12 items-stretch transition-colors group-hover:bg-[color:var(--foreground)] group-hover:text-[color:var(--background)]">
+          <div className="col-span-12 md:col-span-1 md:hard-r flex md:flex-col items-center md:items-start justify-between md:justify-start p-4 md:p-6 gap-2">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em]">
+              N° {String(i + 1).padStart(2, "0")}
+            </div>
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] opacity-60">2024</div>
           </div>
-          <div className="col-span-10 md:col-span-5">
-            <h3 className="font-display text-3xl md:text-6xl leading-[0.95] transition-colors group-hover:italic">
-              {p.name}
-            </h3>
-            {p.soon && (
-              <span className="mt-3 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[color:var(--accent-red)]">
-                <span className="h-1 w-1 rounded-full bg-[color:var(--accent-red)]" /> Shipping soon
-              </span>
-            )}
-          </div>
-          <div className="col-span-12 md:col-span-4 order-3 md:order-none">
-            <p className="text-sm text-[color:var(--muted-foreground)] leading-relaxed">{p.tag}</p>
-            <div className="mt-3 flex flex-wrap gap-1.5">
+          <div className="col-span-12 md:col-span-6 md:hard-r p-6 md:p-10 flex flex-col justify-between gap-6">
+            <div>
+              <h3 className="font-display text-4xl md:text-7xl leading-[0.9]">
+                {p.name}
+              </h3>
+              {p.soon && (
+                <span className="mt-4 inline-flex items-center gap-2 chip chip-red !py-1">
+                  <span className="h-1.5 w-1.5 bg-white" /> Shipping Soon
+                </span>
+              )}
+            </div>
+            <p className="text-base font-bold uppercase leading-tight opacity-80 max-w-md">{p.tag}</p>
+            <div className="flex flex-wrap gap-2">
               {p.tech.map((t) => (
-                <span key={t} className="font-mono text-[10px] uppercase tracking-[0.15em] text-[color:var(--foreground)]/70 border border-[color:var(--border)] rounded-full px-2 py-0.5">
+                <span key={t} className="chip !py-1 !px-2 !text-[10px] group-hover:bg-transparent group-hover:text-white group-hover:border-white">
                   {t}
                 </span>
               ))}
             </div>
           </div>
-          <div className="col-span-12 md:col-span-2 flex md:justify-end items-center">
-            <span className="grid h-11 w-11 place-items-center rounded-full border border-[color:var(--border-strong)] transition-all duration-500 group-hover:bg-[color:var(--foreground)] group-hover:text-[color:var(--background)]">
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
+          <div className="col-span-12 md:col-span-5 relative overflow-hidden aspect-[4/3] md:aspect-auto bg-[color:var(--surface)]">
+            <img src={p.image} alt={`${p.name} preview`} loading="lazy" className="absolute inset-0 h-full w-full object-cover editorial-grayscale group-hover:scale-105 transition-transform duration-700" />
+            <span className="absolute top-4 right-4 grid h-12 w-12 place-items-center bg-white text-black group-hover:bg-[color:var(--accent-red)] group-hover:text-white transition-colors">
+              <ArrowUpRight className="h-5 w-5 transition-transform group-hover:rotate-45" />
             </span>
-          </div>
-
-          {/* Hover-reveal thumbnail */}
-          <div className="pointer-events-none absolute right-[26%] top-1/2 -translate-y-1/2 z-10 hidden md:block opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
-            <div className="w-[280px] aspect-[4/3] overflow-hidden shadow-[var(--shadow-card)] rotate-2">
-              <img src={p.image} alt="" loading="lazy" className="h-full w-full object-cover editorial-grayscale" />
-            </div>
           </div>
         </div>,
       )}
@@ -615,28 +595,13 @@ function Projects() {
   return (
     <section id="work" className="relative py-16 md:py-24">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="01" eyebrow="Featured work" title="Selected projects." kicker="Hover a row — the work is the argument." />
+        <SectionHeader num="01" eyebrow="Featured Work" title="Selected Projects." kicker="Five builds. The work is the argument." />
 
-        <ul className="border-t border-[color:var(--border-strong)]">
+        <ul className="border-t-2 border-[color:var(--foreground)] border-x-2">
           {PROJECTS.map((p, i) => (
             <ProjectRow key={p.name} p={p} i={i} />
           ))}
         </ul>
-
-        {/* Static gallery for mobile & context */}
-        <div className="mt-20 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {PROJECTS.slice(0, 3).map((p) => (
-            <div key={p.name} className="reveal">
-              <div className="aspect-[4/3] overflow-hidden bg-[color:var(--surface)]">
-                <img src={p.image} alt={`${p.name} preview`} loading="lazy" className="h-full w-full object-cover editorial-grayscale" />
-              </div>
-              <div className="mt-4 flex items-baseline justify-between">
-                <div className="font-display text-2xl italic">{p.name}</div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">{p.tech[0]}</div>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -662,9 +627,9 @@ function WordPress() {
     { name: "JLO Consulting Group", url: "jloconsultinggroup.com", href: "https://jloconsultinggroup.com", note: "Immigration consulting site in Spanish with booking integration.", img: wpJlo },
   ];
   return (
-    <section id="wordpress" className="relative py-24 md:py-32 bg-[color:var(--surface)]">
+    <section id="wordpress" className="relative py-20 md:py-28 bg-[color:var(--surface)]">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="05" eyebrow="WordPress & Divi" title="Client sites." kicker="Live picks and an archive on Behance." />
+        <SectionHeader num="05" eyebrow="WordPress & Divi" title="Client Sites." kicker="Live picks + Behance archive." />
 
         <div className="grid gap-10 md:grid-cols-2">
           {live.map((l) => (
@@ -697,16 +662,16 @@ function WordPress() {
           ))}
         </div>
 
-        <div className="mt-20">
-          <div className="reveal flex items-end justify-between mb-6 border-b border-[color:var(--border-strong)] pb-4">
-            <h3 className="font-display text-2xl italic">Archive</h3>
+        <div className="mt-16">
+          <div className="reveal flex items-end justify-between mb-6 border-b-2 border-[color:var(--foreground)] pb-4">
+            <h3 className="font-display text-2xl md:text-3xl">Archive</h3>
             <a
               href="https://behance.net/michaelsanabria2"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)] hover:text-[color:var(--foreground)]"
+              className="inline-flex items-center gap-2 chip"
             >
-              View all on Behance <ArrowUpRight className="h-3.5 w-3.5" />
+              View All On Behance <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
           <ul>
@@ -716,12 +681,12 @@ function WordPress() {
                   href="https://behance.net/michaelsanabria2"
                   target="_blank"
                   rel="noreferrer"
-                  className="reveal group flex items-baseline gap-6 border-b border-[color:var(--border)] py-5 transition-colors hover:text-[color:var(--foreground)]"
+                  className="reveal group flex items-baseline gap-6 hard-b py-5 transition-colors hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] px-2"
                 >
-                  <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[color:var(--muted-foreground)] w-10">
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] w-12 text-[color:var(--accent-red)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="font-display text-2xl md:text-3xl italic-serif group-hover:italic">{name}</span>
+                  <span className="font-display text-2xl md:text-3xl">{name}</span>
                   <ArrowUpRight className="ml-auto h-4 w-4 text-[color:var(--muted-foreground)] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
               </li>
@@ -743,17 +708,17 @@ const CERTS = [
 
 function Certifications() {
   return (
-    <section id="certifications" className="relative py-24 md:py-28">
+    <section id="certifications" className="relative py-20 md:py-24">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <SectionHeader num="06" eyebrow="Certifications" title="Credentialed." />
-        <div className="grid gap-0 md:grid-cols-3 border-t border-[color:var(--border-strong)]">
+        <div className="grid md:grid-cols-3 hard-all">
           {CERTS.map((c, i) => (
             <div
               key={c}
-              className={`reveal py-10 pr-8 ${i > 0 ? "md:border-l md:border-[color:var(--border)] md:pl-8" : ""}`}
+              className={`reveal p-8 md:p-10 ${i < CERTS.length - 1 ? "hard-b md:hard-b-0 md:hard-r" : ""}`}
             >
-              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[color:var(--muted-foreground)]">Oracle · {String(i + 1).padStart(2, "0")}</div>
-              <div className="mt-4 font-display text-2xl md:text-3xl leading-tight">{c}</div>
+              <div className="chip chip-red !px-2 !py-1 !text-[10px]">Oracle · {String(i + 1).padStart(2, "0")}</div>
+              <div className="mt-6 font-display text-2xl md:text-3xl leading-tight">{c}</div>
             </div>
           ))}
         </div>
@@ -766,39 +731,42 @@ function Certifications() {
 
 function Contact() {
   return (
-    <section id="contact" className="relative py-32 md:py-40 bg-[color:var(--foreground)] text-[color:var(--background)]">
-      <div className="mx-auto max-w-[1200px] px-6 md:px-10">
-        <div className="reveal flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.4em] text-[color:var(--background)]/60">
-          <span className="w-12 h-px bg-[color:var(--background)]/30" /> Contact / 07
+    <section id="contact" className="relative py-24 md:py-32 bg-[color:var(--foreground)] text-[color:var(--background)]">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-10">
+        <div className="reveal flex items-center gap-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--background)]">
+          <span className="chip chip-red !px-2 !py-1 !text-[10px]">07</span> Contact
         </div>
-        <h2 className="reveal mt-8 font-display text-[clamp(2.6rem,8vw,7rem)] leading-[0.9]">
-          Have a project in mind?<br />
-          <span className="italic text-[color:var(--background)]/60">Let's talk.</span>
+        <h2 className="reveal mt-8 font-display text-[clamp(2.8rem,10vw,9rem)] leading-[0.85]">
+          Ready For The<br />
+          <span className="text-[color:var(--accent-red)]">Next Iteration?</span>
         </h2>
 
-        <div className="reveal mt-16 grid grid-cols-12 gap-8 border-t border-[color:var(--background)]/20 pt-10">
-          <div className="col-span-12 md:col-span-6 space-y-2">
-            <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-[color:var(--background)]/50">Email</div>
-            <a data-cta href="mailto:hello@michael.dev" className="font-display text-3xl md:text-5xl italic hover:text-[color:var(--accent-red)] transition-colors">
+        <div className="reveal mt-14 grid grid-cols-12 gap-6 border-t-2 border-[color:var(--background)] pt-10">
+          <div className="col-span-12 md:col-span-7 space-y-3">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--background)]/60">Email</div>
+            <a data-cta href="mailto:hello@michael.dev" className="block font-display text-4xl md:text-7xl hover:text-[color:var(--accent-red)] transition-colors">
               hello@michael.dev
             </a>
+            <a data-cta href="mailto:hello@michael.dev" className="mt-8 inline-flex items-center gap-3 chip chip-red text-lg !px-8 !py-4">
+              Get In Touch <ArrowUpRight className="h-4 w-4" />
+            </a>
           </div>
-          <div className="col-span-12 md:col-span-6 flex flex-col gap-4 md:items-end justify-end font-mono text-[11px] uppercase tracking-[0.28em]">
-            <a href="https://linkedin.com/in/michael-sanabria/" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 hover:text-[color:var(--background)]">
-              <Linkedin className="h-3.5 w-3.5" /> LinkedIn
-              <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
+          <div className="col-span-12 md:col-span-5 flex flex-col gap-3 justify-end font-mono text-[11px] font-bold uppercase tracking-[0.28em]">
+            <a href="https://linkedin.com/in/michael-sanabria/" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 border-2 border-[color:var(--background)]/30 hover:border-[color:var(--accent-red)] hover:bg-[color:var(--accent-red)] px-5 py-4 transition-colors">
+              <Linkedin className="h-4 w-4" /> LinkedIn
+              <ArrowUpRight className="ml-auto h-4 w-4 transition-transform group-hover:rotate-45" />
             </a>
-            <a href="https://github.com/michaeldevelopment" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 hover:text-[color:var(--background)]">
-              <Github className="h-3.5 w-3.5" /> GitHub
-              <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
+            <a href="https://github.com/michaeldevelopment" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 border-2 border-[color:var(--background)]/30 hover:border-[color:var(--accent-red)] hover:bg-[color:var(--accent-red)] px-5 py-4 transition-colors">
+              <Github className="h-4 w-4" /> GitHub
+              <ArrowUpRight className="ml-auto h-4 w-4 transition-transform group-hover:rotate-45" />
             </a>
-            <a href="https://behance.net/michaelsanabria2" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 hover:text-[color:var(--background)]">
-              <ExternalLink className="h-3.5 w-3.5" /> Behance
-              <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
+            <a href="https://behance.net/michaelsanabria2" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 border-2 border-[color:var(--background)]/30 hover:border-[color:var(--accent-red)] hover:bg-[color:var(--accent-red)] px-5 py-4 transition-colors">
+              <ExternalLink className="h-4 w-4" /> Behance
+              <ArrowUpRight className="ml-auto h-4 w-4 transition-transform group-hover:rotate-45" />
             </a>
-            <a data-cta href="mailto:hello@michael.dev" className="group mt-2 inline-flex items-center gap-3 hover:text-[color:var(--background)]">
-              <Mail className="h-3.5 w-3.5" /> Send email
-              <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
+            <a data-cta href="mailto:hello@michael.dev" className="group inline-flex items-center gap-3 border-2 border-[color:var(--background)]/30 hover:border-[color:var(--accent-red)] hover:bg-[color:var(--accent-red)] px-5 py-4 transition-colors">
+              <Mail className="h-4 w-4" /> Send Email
+              <ArrowUpRight className="ml-auto h-4 w-4 transition-transform group-hover:rotate-45" />
             </a>
           </div>
         </div>
