@@ -667,7 +667,7 @@ function WordPress() {
   return (
     <section id="wordpress" className="relative py-20 md:py-28 bg-[color:var(--surface)]">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="05" eyebrow="WordPress & Divi" title="Client Sites." kicker="Live picks + Behance archive." />
+        <SectionHeader num="05" eyebrow="WordPress & Divi" title="Client Sites." kicker="Live picks + Behance." />
 
         <div className="grid gap-10 md:grid-cols-2">
           {live.map((l) => (
