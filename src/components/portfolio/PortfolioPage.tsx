@@ -18,7 +18,6 @@ import projQuick from "@/assets/project-quick.jpg";
 import projWayki from "@/assets/project-wayki.jpg";
 import projEcom from "@/assets/project-ecommerce.jpg";
 import projMovies from "@/assets/project-movies.jpg";
-import projFeedback from "@/assets/project-feedback.jpg";
 import wpVida from "@/assets/wp-vida-creede.png";
 import wpJlo from "@/assets/wp-jlo.png";
 import behanceImg from "@/assets/behance-preview.jpg";
@@ -580,13 +579,6 @@ const PROJECTS: Project[] = [
     tag: "Browse and filter a movies and shows catalog.",
     tech: ["React", "TypeScript", "Vite", "Redux Toolkit"],
     image: projMovies,
-  },
-  {
-    name: "Product feedback app",
-    tag: "Feedback board for prioritizing product requests.",
-    tech: ["Next.js", "GraphQL", "Apollo", "styled-components"],
-    image: projFeedback,
-    soon: true,
   },
 ];
 
