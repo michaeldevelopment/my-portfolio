@@ -21,6 +21,7 @@ import projMovies from "@/assets/project-movies.jpg";
 import projFeedback from "@/assets/project-feedback.jpg";
 import wpVida from "@/assets/wp-vida-creede.png";
 import wpJlo from "@/assets/wp-jlo.png";
+import behanceImg from "@/assets/behance-preview.jpg";
 
 /* ---------------- Custom cursor ---------------- */
 
@@ -784,7 +785,6 @@ export function PortfolioPage() {
         <Stack />
         <Experience />
         <WordPress />
-        <Certifications />
         <Contact />
       </main>
     </div>
