@@ -132,8 +132,7 @@ const SECTIONS = [
   { id: "about", label: "About", num: "02" },
   { id: "stack", label: "Stack", num: "03" },
   { id: "experience", label: "Experience", num: "04" },
-  { id: "wordpress", label: "WordPress", num: "05" },
-  { id: "contact", label: "Contact", num: "06" },
+  { id: "contact", label: "Contact", num: "05" },
 ];
 
 function Nav() {
@@ -233,7 +232,7 @@ function Hero() {
           </h1>
           <div className="reveal mt-10 flex flex-col md:flex-row gap-10 md:gap-16 items-start">
             <p className="max-w-md text-sm md:text-base font-bold uppercase leading-tight">
-              Building web apps that ship fast and hold up under real traffic — with AI in the loop.
+              Building web apps that ship fast with AI in the loop.
             </p>
             <div className="flex flex-col gap-4">
               <a data-cta href="#work" className="btn-fill fill-red group inline-flex items-center gap-3 chip chip-solid">
@@ -253,13 +252,13 @@ function Hero() {
           <div className="reveal p-6 md:p-8 hard-b flex flex-col gap-6">
             <div>
               <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)] mb-2">Location</div>
-              <div className="font-display text-2xl leading-none flex items-center gap-2"><MapPin className="h-5 w-5" /> Medellín</div>
-              <div className="font-mono text-[11px] font-bold uppercase mt-1">Colombia · UTC−5</div>
+              <div className="font-display text-2xl leading-none flex items-center gap-2"><MapPin className="h-5 w-5" /> Colombia</div>
+              <div className="font-mono text-[11px] font-bold uppercase mt-1">UTC−5</div>
             </div>
             <div>
               <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)] mb-2">Status</div>
               <div className="inline-flex items-center gap-2 chip chip-red">
-                <span className="h-2 w-2 bg-white animate-pulse" /> Available Q1 · 2026
+                <span className="h-2 w-2 bg-white animate-pulse" /> Available Now
               </div>
             </div>
           </div>
