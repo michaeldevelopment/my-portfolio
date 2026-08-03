@@ -658,18 +658,6 @@ function Projects() {
 
 /* ---------------- WordPress ---------------- */
 
-const ARCHIVE = [
-  "Aneta Web Design",
-  "Hector Web Design",
-  "Yokairy Web Design",
-  "Yokairy Instagram Feed",
-  "Melecio Web Design",
-  "Melecio Instagram Feed",
-  "Trinidad Instagram Feed",
-  "Maribel Instagram Feed",
-  "Binet Cuts Instagram Feed",
-];
-
 function WordPress() {
   const live = [
     { name: "Vida Creede", url: "vidaeattolive.com", href: "https://vidaeattolive.com", note: "Pre-order landing page for a Colorado trail-food café.", img: wpVida },
