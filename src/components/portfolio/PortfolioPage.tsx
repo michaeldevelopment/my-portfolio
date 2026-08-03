@@ -273,10 +273,9 @@ function Hero() {
         </div>
       </div>
 
-      <div className="reveal grid grid-cols-2 md:grid-cols-4 hard-t">
+      <div className="reveal grid grid-cols-2 md:grid-cols-3 hard-t">
         <div className="p-6 md:p-8 hard-r"><Stat value={3} suffix="+" label="Years shipping" /></div>
         <div className="p-6 md:p-8 md:hard-r"><Stat value={15} suffix="+" label="Projects" /></div>
-        <div className="p-6 md:p-8 hard-r"><Stat value={95} suffix="%" label="Test coverage" /></div>
         <div className="p-6 md:p-8">
           <div className="font-display text-3xl md:text-4xl">Enterprise</div>
           <div className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)]">EPAM · Globant</div>
