@@ -700,64 +700,20 @@ function WordPress() {
         </div>
 
         <div className="mt-16">
-          <div className="reveal flex items-end justify-between mb-6 border-b-2 border-[color:var(--foreground)] pb-4">
-            <h3 className="font-display text-2xl md:text-3xl">Archive</h3>
-            <a
-              href="https://behance.net/michaelsanabria2"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 chip"
-            >
-              View All On Behance <ArrowUpRight className="h-3.5 w-3.5" />
-            </a>
-          </div>
-          <ul>
-            {ARCHIVE.map((name, i) => (
-              <li key={name}>
-                <a
-                  href="https://behance.net/michaelsanabria2"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="reveal group flex items-baseline gap-6 hard-b py-5 transition-colors hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] px-2"
-                >
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] w-12 text-[color:var(--accent-red)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="font-display text-2xl md:text-3xl">{name}</span>
-                  <ArrowUpRight className="ml-auto h-4 w-4 text-[color:var(--muted-foreground)] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Certifications ---------------- */
-
-const CERTS = [
-  "Oracle Cloud Foundations Associate",
-  "Oracle Cloud Data Foundations Associate",
-  "Oracle Cloud AI Foundations Associate",
-];
-
-function Certifications() {
-  return (
-    <section id="certifications" className="relative py-20 md:py-24">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="06" eyebrow="Certifications" title="Credentialed." />
-        <div className="grid md:grid-cols-3 hard-all">
-          {CERTS.map((c, i) => (
-            <div
-              key={c}
-              className={`reveal p-8 md:p-10 ${i < CERTS.length - 1 ? "hard-b md:hard-b-0 md:hard-r" : ""}`}
-            >
-              <div className="chip chip-red !px-2 !py-1 !text-[10px]">Oracle · {String(i + 1).padStart(2, "0")}</div>
-              <div className="mt-6 font-display text-2xl md:text-3xl leading-tight">{c}</div>
+          <a
+            href="https://behance.net/michaelsanabria2"
+            target="_blank"
+            rel="noreferrer"
+            className="reveal group block hard-all"
+          >
+            <div className="relative aspect-[16/10] overflow-hidden bg-[color:var(--background)] hard-b">
+              <img src={behanceImg} alt="Behance profile preview" loading="lazy" width={1600} height={1008} className="h-full w-full object-cover object-top editorial-grayscale" />
             </div>
-          ))}
+            <div className="flex items-center justify-between gap-6 p-6 md:p-8">
+              <h3 className="font-display text-xl md:text-2xl">See my web builder works on my Behance page</h3>
+              <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform group-hover:rotate-45" />
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -781,10 +737,10 @@ function Contact() {
         <div className="reveal mt-14 grid grid-cols-12 gap-6 border-t-2 border-[color:var(--background)] pt-10">
           <div className="col-span-12 md:col-span-7 space-y-3">
             <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--background)]/60">Email</div>
-            <a data-cta href="mailto:hello@michael.dev" className="block font-display text-3xl md:text-5xl hover:text-[color:var(--accent-red)] transition-colors">
-              hello@michael.dev
+            <a data-cta href="mailto:maicolsana12@gmail.com" className="block font-display text-3xl md:text-5xl hover:text-[color:var(--accent-red)] transition-colors">
+              maicolsana12@gmail.com
             </a>
-            <a data-cta href="mailto:hello@michael.dev" className="btn-fill fill-blue mt-8 inline-flex items-center gap-3 chip chip-red text-base !px-8 !py-4">
+            <a data-cta href="mailto:maicolsana12@gmail.com" className="btn-fill fill-blue mt-8 inline-flex items-center gap-3 chip chip-red text-base !px-8 !py-4">
               <span className="inline-flex items-center gap-3">Get In Touch <ArrowUpRight className="h-4 w-4" /></span>
             </a>
           </div>
@@ -801,7 +757,7 @@ function Contact() {
               <ExternalLink className="h-4 w-4" /> Behance
               <ArrowUpRight className="ml-auto h-4 w-4 transition-transform group-hover:rotate-45" />
             </a>
-            <a data-cta href="mailto:hello@michael.dev" className="group inline-flex items-center gap-3 border-2 border-[color:var(--background)]/30 hover:border-[color:var(--accent-red)] hover:bg-[color:var(--accent-red)] px-5 py-4 transition-colors">
+            <a data-cta href="mailto:maicolsana12@gmail.com" className="group inline-flex items-center gap-3 border-2 border-[color:var(--background)]/30 hover:border-[color:var(--accent-red)] hover:bg-[color:var(--accent-red)] px-5 py-4 transition-colors">
               <Mail className="h-4 w-4" /> Send Email
               <ArrowUpRight className="ml-auto h-4 w-4 transition-transform group-hover:rotate-45" />
             </a>
