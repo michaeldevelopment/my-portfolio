@@ -700,19 +700,19 @@ function WordPress() {
           ))}
         </div>
 
-        <div className="mt-16">
+        <div className="mt-16 max-w-2xl">
           <a
             href="https://behance.net/michaelsanabria2"
             target="_blank"
             rel="noreferrer"
             className="reveal group block hard-all"
           >
-            <div className="relative aspect-[16/10] overflow-hidden bg-[color:var(--background)] hard-b">
-              <img src={behanceImg} alt="Behance profile preview" loading="lazy" width={1600} height={1008} className="h-full w-full object-cover object-top editorial-grayscale" />
+            <div className="relative aspect-[16/9] overflow-hidden bg-[color:var(--background)] hard-b">
+              <img src={behanceImg} alt="Michael Sanabria Behance profile preview" loading="lazy" width={1920} height={1000} className="h-full w-full object-cover object-top" />
             </div>
-            <div className="flex items-center justify-between gap-6 p-6 md:p-8">
-              <h3 className="font-display text-xl md:text-2xl">See my web builder works on my Behance page</h3>
-              <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform group-hover:rotate-45" />
+            <div className="flex items-center justify-between gap-4 p-5 md:p-6">
+              <h3 className="font-display text-base md:text-lg">See my web builder works on my Behance page</h3>
+              <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform group-hover:rotate-45" />
             </div>
           </a>
         </div>
@@ -738,7 +738,7 @@ function Contact() {
         <div className="reveal mt-14 grid grid-cols-12 gap-6 border-t-2 border-[color:var(--background)] pt-10">
           <div className="col-span-12 md:col-span-7 space-y-3">
             <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--background)]/60">Email</div>
-            <a data-cta href="mailto:maicolsana12@gmail.com" className="block font-display text-3xl md:text-5xl hover:text-[color:var(--accent-red)] transition-colors">
+            <a data-cta href="mailto:maicolsana12@gmail.com" className="block font-display text-xl md:text-3xl hover:text-[color:var(--accent-red)] transition-colors">
               maicolsana12@gmail.com
             </a>
             <a data-cta href="mailto:maicolsana12@gmail.com" className="btn-fill fill-blue mt-8 inline-flex items-center gap-3 chip chip-red text-base !px-8 !py-4">
