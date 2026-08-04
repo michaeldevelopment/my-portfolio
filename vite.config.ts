@@ -12,4 +12,7 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Outside Lovable, the deploy target comes from NITRO_PRESET (netlify.toml sets `netlify`).
+  // Inside a Lovable build the preset is forced to Cloudflare and this is ignored.
+  nitro: process.env["NITRO_PRESET"] ? { preset: process.env["NITRO_PRESET"] } : true,
 });
