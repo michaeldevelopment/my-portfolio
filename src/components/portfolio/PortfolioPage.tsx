@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   ArrowUpRight,
   Download,
@@ -21,6 +21,120 @@ import projMovies from "@/assets/project-movies.jpg";
 import wpVida from "@/assets/wp-vida-creede.png";
 import wpJlo from "@/assets/wp-jlo.png";
 import behanceImg from "@/assets/behance-preview.jpg";
+
+type Language = "en" | "es";
+
+const ES: Record<string, string> = {
+  Work: "Proyectos",
+  About: "Sobre mí",
+  Experience: "Experiencia",
+  Contact: "Contacto",
+  "Toggle theme": "Cambiar tema",
+  "Switch to Spanish": "Cambiar a español",
+  "Switch to English": "Cambiar a inglés",
+  "Full Stack AI JS/TS Developer": "Desarrollador Full Stack IA JS/TS",
+  "Portfolio 2026": "Portafolio 2026",
+  "Full Stack": "Full Stack",
+  "AI Developer": "Desarrollador IA",
+  "Building web apps that ship fast with AI in the loop.": "Construyendo aplicaciones web que se lanzan rápido con IA en el proceso.",
+  "Explore Projects": "Explorar proyectos",
+  "Download CV": "Descargar CV",
+  Location: "Ubicación",
+  Status: "Estado",
+  "Available Now": "Disponible ahora",
+  "System design composition": "Composición de diseño de sistemas",
+  "Years shipping": "Años creando",
+  Projects: "Proyectos",
+  Enterprise: "Empresarial",
+  "From Mechatronics — To Full Stack.": "De la mecatrónica — Al Full Stack.",
+  "Engineer at heart. I care more about": "Ingeniero de corazón. Me importa más",
+  "what's happening under the hood": "lo que sucede detrás del código",
+  "than which library gets the credit.": "que qué librería recibe el crédito.",
+  "Mechatronics roots": "Raíces en mecatrónica",
+  "Full stack shipper": "Desarrollo full stack",
+  "AI-native workflows": "Flujos nativos con IA",
+  "Ships under load": "Escala bajo carga",
+  "Core Stack.": "Stack principal.",
+  "Pragmatic, JS/TS-heavy, AI in the loop.": "Pragmático, centrado en JS/TS y con IA en el proceso.",
+  Frontend: "Frontend",
+  Backend: "Backend",
+  Testing: "Pruebas",
+  "AI workflows": "Flujos de IA",
+  Practices: "Prácticas",
+  "Custom skills": "Skills personalizadas",
+  "Agent orchestration": "Orquestación de agentes",
+  "Timeline.": "Trayectoria.",
+  "Enterprise × personal products.": "Empresas × productos personales.",
+  "Software Engineer": "Ingeniero de software",
+  "Frontend Mentor (React)": "Mentor Frontend (React)",
+  "Website Designer": "Diseñador web",
+  "EPAM · Insurance sector": "EPAM · Sector de seguros",
+  "EPAM · Healthcare technology sector": "EPAM · Sector de tecnología en salud",
+  "Globant · Entertainment and media": "Globant · Entretenimiento y medios",
+  "Globant · Large-scale retail platform": "Globant · Plataforma retail a gran escala",
+  "Globant · Retirement and financial services": "Globant · Jubilación y servicios financieros",
+  "Jun 2025 – Present": "Jun 2025 – Presente",
+  "Sep – Nov 2025": "Sep – Nov 2025",
+  "Feb – May 2025": "Feb – May 2025",
+  "May 2024 – Jan 2025": "May 2024 – Ene 2025",
+  "Jan 2023 – Apr 2024": "Ene 2023 – Abr 2024",
+  "Apr – Dec 2022": "Abr – Dic 2022",
+  "Oct 2020 – May 2021": "Oct 2020 – May 2021",
+  "Migrating legacy APIs to Node.js with AI-assisted workflows.": "Migrando APIs heredadas a Node.js con flujos asistidos por IA.",
+  "I use an existing internal AI migration tool to speed up scaffolding, then refine its output, write custom skills for recurring patterns, and orchestrate multi-step agent runs. Built and tested Node.js APIs on AWS Lambda and API Gateway.": "Uso una herramienta interna de migración con IA para acelerar la estructura inicial, luego refino sus resultados, creo skills personalizadas para patrones recurrentes y orquesto agentes en varios pasos. Construí y probé APIs de Node.js en AWS Lambda y API Gateway.",
+  "Led a structured React mentorship track for junior developers.": "Lideré un programa estructurado de mentoría en React para desarrolladores junior.",
+  "Covered hooks, state management, and clean code through code review and project evaluation. One mentee was hired after completing the program.": "Cubrí hooks, manejo de estado y código limpio mediante revisiones y evaluación de proyectos. Un aprendiz fue contratado al completar el programa.",
+  "Modernized a cloud platform connecting financial and clinical workflows.": "Modernicé una plataforma cloud que conecta flujos financieros y clínicos.",
+  "Built unit, integration, and BDD tests with Playwright and OJET/Preact across cloud services.": "Construí pruebas unitarias, de integración y BDD con Playwright y OJET/Preact en servicios cloud.",
+  "Built new sections of an internal analytics platform.": "Construí nuevas secciones de una plataforma interna de analítica.",
+  "Used React, TypeScript, and Ant Design with vertical slice and onion architecture. Presented demos and interviewed frontend candidates.": "Usé React, TypeScript y Ant Design con arquitectura vertical slice y onion. Presenté demos y entrevisté candidatos frontend.",
+  "Built e-commerce features for a platform serving millions.": "Construí funciones de comercio electrónico para una plataforma usada por millones.",
+  "React, Next.js, GraphQL Apollo, SSR and prefetching for faster loads. Test coverage above 95% with RTL.": "React, Next.js, GraphQL Apollo, SSR y precarga para mejorar los tiempos de carga.",
+  "Built accessible interfaces for a retirement plan platform.": "Construí interfaces accesibles para una plataforma de planes de jubilación.",
+  "React and TypeScript meeting AA accessibility standards, AWS for delivery, client sprint demos.": "React y TypeScript bajo estándares de accesibilidad AA, AWS para despliegue y demos de sprint al cliente.",
+  "Designed client websites with WordPress and Divi.": "Diseñé sitios web para clientes con WordPress y Divi.",
+  "Balanced fast turnaround with consistent quality across a portfolio of client sites.": "Equilibré entregas rápidas con calidad consistente en un portafolio de sitios para clientes.",
+  "Featured Work": "Trabajo destacado",
+  "Selected Projects.": "Proyectos seleccionados.",
+  "Five builds. The work is the argument.": "Cuatro proyectos. El trabajo es el argumento.",
+  "Full CRUD recipe app with favorites and a premium payment tier.": "Aplicación de recetas con CRUD, favoritos y un plan premium.",
+  "Helps missing pets find their way home with maps and geolocation.": "Ayuda a mascotas perdidas a volver a casa con mapas y geolocalización.",
+  "E-commerce app": "Aplicación e-commerce",
+  "Storefront with a full checkout flow.": "Tienda con un flujo de pago completo.",
+  "Entertainment hub": "Centro de entretenimiento",
+  "Browse and filter a movies and shows catalog.": "Explora y filtra un catálogo de películas y series.",
+  "Shipping Soon": "Próximamente",
+  "preview": "vista previa",
+  "WordPress & Divi": "WordPress y Divi",
+  "Client Sites.": "Sitios de clientes.",
+  "Live picks + Behance.": "Sitios activos + Behance.",
+  "Pre-order landing page for a Colorado trail-food café.": "Landing de pedidos anticipados para un café de comida de senderismo en Colorado.",
+  "Immigration consulting site in Spanish with booking integration.": "Sitio de consultoría migratoria en español con reservas integradas.",
+  "site preview": "vista previa del sitio",
+  "Michael Sanabria Behance profile preview": "Vista previa del perfil de Behance de Michael Sanabria",
+  "See my web builder works on my Behance page": "Mira mis trabajos de creación web en mi página de Behance",
+  "Ready For The": "¿Listo para la",
+  "Next Iteration?": "próxima iteración?",
+  Email: "Correo",
+  "Get In Touch": "Hablemos",
+  "Send Email": "Enviar correo",
+};
+
+type LanguageContextValue = {
+  language: Language;
+  setLanguage: (language: Language) => void;
+  t: (text: string) => string;
+};
+
+const LanguageContext = createContext<LanguageContextValue>({
+  language: "en",
+  setLanguage: () => undefined,
+  t: (text) => text,
+});
+
+function useLanguage() {
+  return useContext(LanguageContext);
+}
 
 /* ---------------- Custom cursor ---------------- */
 
@@ -136,6 +250,7 @@ const SECTIONS = [
 ];
 
 function Nav() {
+  const { language, setLanguage, t } = useLanguage();
   const [active, setActive] = useState("work");
   const [scrolled, setScrolled] = useState(false);
   const [dark, setDark] = useState(false);
@@ -194,20 +309,31 @@ function Nav() {
               href={`#${s.id}`}
               className={`nav-link transition-colors ${active === s.id ? "active text-[color:var(--accent-red)]" : "hover:text-[color:var(--accent-red)]"}`}
             >
-              {s.label}
+              {t(s.label)}
             </a>
           ))}
         </nav>
         <a data-cta href="#contact" className="hidden md:inline-flex items-center gap-2 chip chip-red">
-          Contact <ArrowUpRight className="h-3.5 w-3.5" />
+          {t("Contact")} <ArrowUpRight className="h-3.5 w-3.5" />
         </a>
-        <button
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
-          className="ml-3 grid h-9 w-9 place-items-center border-2 border-[color:var(--foreground)] hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] transition-colors"
-        >
-          {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-        </button>
+        <div className="ml-3 flex items-center">
+          <button
+            type="button"
+            onClick={() => setLanguage(language === "en" ? "es" : "en")}
+            aria-label={t(language === "en" ? "Switch to Spanish" : "Switch to English")}
+            className="grid h-9 min-w-12 place-items-center border-2 border-r-0 border-[color:var(--foreground)] px-2 font-mono text-[10px] font-bold uppercase transition-colors hover:bg-[color:var(--accent-blue)] hover:text-white"
+          >
+            {language === "en" ? "ES" : "EN"}
+          </button>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={t("Toggle theme")}
+            className="grid h-9 w-9 place-items-center border-2 border-[color:var(--foreground)] hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] transition-colors"
+          >
+            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+        </div>
       </div>
     </header>
   );
@@ -216,33 +342,34 @@ function Nav() {
 /* ---------------- Hero ---------------- */
 
 function Hero() {
+  const { t } = useLanguage();
   return (
     <section id="top" className="relative overflow-hidden pt-28 md:pt-32 hard-b">
       <div className="grid grid-cols-12">
         <div className="col-span-12 lg:col-span-9 px-6 md:px-10 py-16 md:py-24 lg:hard-r">
           <p className="reveal font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--foreground)] mb-8 flex items-center gap-3">
             <span className="w-10 h-[2px] bg-[color:var(--foreground)]" />
-            Full Stack AI JS/TS Developer
+            {t("Full Stack AI JS/TS Developer")}
             <span>/</span>
-            Portfolio 2026
+            {t("Portfolio 2026")}
           </p>
           <h1 className="reveal font-display text-[clamp(2.5rem,9vw,7.5rem)] leading-[0.82]">
-            <span className="gl" data-t="Full Stack">Full Stack</span><br />
-            <span className="gl text-[color:var(--accent-red)]" data-t="AI Developer">AI Developer</span>
+            <span className="gl" data-t={t("Full Stack")}>{t("Full Stack")}</span><br />
+            <span className="gl text-[color:var(--accent-red)]" data-t={t("AI Developer")}>{t("AI Developer")}</span>
           </h1>
           <div className="reveal mt-10 flex flex-col md:flex-row gap-10 md:gap-16 items-start">
             <p className="max-w-md text-sm md:text-base font-bold uppercase leading-tight">
-              Building web apps that ship fast with AI in the loop.
+              {t("Building web apps that ship fast with AI in the loop.")}
             </p>
             <div className="flex flex-col gap-4">
               <a data-cta href="#work" className="btn-fill fill-red group inline-flex items-center gap-3 chip chip-solid">
                 <span className="inline-flex items-center gap-3">
-                  Explore Projects
+                  {t("Explore Projects")}
                   <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
                 </span>
               </a>
               <a href="#" className="btn-fill fill-blue group inline-flex items-center gap-3 chip">
-                <span className="inline-flex items-center gap-3"><Download className="h-3.5 w-3.5" /> Download CV</span>
+                <span className="inline-flex items-center gap-3"><Download className="h-3.5 w-3.5" /> {t("Download CV")}</span>
               </a>
             </div>
           </div>
@@ -251,19 +378,19 @@ function Hero() {
         <div className="col-span-12 lg:col-span-3 flex flex-col justify-between">
           <div className="reveal p-6 md:p-8 hard-b flex flex-col gap-6">
             <div>
-              <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)] mb-2">Location</div>
+               <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)] mb-2">{t("Location")}</div>
               <div className="font-display text-2xl leading-none flex items-center gap-2"><MapPin className="h-5 w-5" /> Colombia</div>
               <div className="font-mono text-[11px] font-bold uppercase mt-1">UTC−5</div>
             </div>
             <div>
-              <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)] mb-2">Status</div>
+               <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)] mb-2">{t("Status")}</div>
               <div className="inline-flex items-center gap-2 chip chip-red">
-                <span className="h-2 w-2 bg-white animate-pulse" /> Available Now
+                 <span className="h-2 w-2 bg-white animate-pulse" /> {t("Available Now")}
               </div>
             </div>
           </div>
           <div className="reveal relative aspect-square lg:aspect-auto lg:flex-1 overflow-hidden bg-[color:var(--surface)]">
-            <img src={heroImg} alt="System design composition" className="h-full w-full object-cover editorial-grayscale" />
+             <img src={heroImg} alt={t("System design composition")} className="h-full w-full object-cover editorial-grayscale" />
             <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-white font-mono text-[10px] font-bold uppercase tracking-[0.2em]">
               <span>MS · System / 003</span>
               <span>'26</span>
@@ -273,10 +400,10 @@ function Hero() {
       </div>
 
       <div className="reveal grid grid-cols-2 md:grid-cols-3 hard-t">
-        <div className="p-6 md:p-8 hard-r"><Stat value={3} suffix="+" label="Years shipping" /></div>
-        <div className="p-6 md:p-8 md:hard-r"><Stat value={15} suffix="+" label="Projects" /></div>
+         <div className="p-6 md:p-8 hard-r"><Stat value={3} suffix="+" label={t("Years shipping")} /></div>
+         <div className="p-6 md:p-8 md:hard-r"><Stat value={15} suffix="+" label={t("Projects")} /></div>
         <div className="p-6 md:p-8">
-          <div className="font-display text-3xl md:text-4xl">Enterprise</div>
+           <div className="font-display text-3xl md:text-4xl">{t("Enterprise")}</div>
           <div className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)]">EPAM · Globant</div>
         </div>
       </div>
@@ -318,20 +445,21 @@ function Stat({ value, suffix, label }: { value: number; suffix?: string; label:
 /* ---------------- Section header ---------------- */
 
 function SectionHeader({ num, eyebrow, title, kicker }: { num: string; eyebrow: string; title: string; kicker?: string }) {
+  const { t } = useLanguage();
   return (
     <div className="mb-12 md:mb-16 grid grid-cols-12 gap-6 md:gap-8 items-end border-t-2 border-[color:var(--foreground)] pt-8">
       <div className="col-span-12 md:col-span-8">
         <div className="reveal flex items-center gap-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em]">
           <span className="chip chip-red !px-2 !py-1 !text-[10px]">{num}</span>
-          {eyebrow}
+           {t(eyebrow)}
         </div>
         <h2 className="reveal mt-6 font-display text-[clamp(1.75rem,4.8vw,3.75rem)] leading-[0.88]">
-          <span className="gl" data-t={title}>{title}</span>
+           <span className="gl" data-t={t(title)}>{t(title)}</span>
         </h2>
       </div>
       {kicker && (
         <p className="reveal col-span-12 md:col-span-4 max-w-sm text-base md:text-lg font-bold uppercase leading-tight">
-          {kicker}
+           {t(kicker)}
         </p>
       )}
     </div>
@@ -341,6 +469,7 @@ function SectionHeader({ num, eyebrow, title, kicker }: { num: string; eyebrow: 
 /* ---------------- About ---------------- */
 
 function About() {
+  const { t } = useLanguage();
   const bullets = [
     "Mechatronics roots",
     "Full stack shipper",
@@ -350,10 +479,10 @@ function About() {
   return (
     <section id="about" className="relative py-20 md:py-28">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="02" eyebrow="About" title="From Mechatronics — To Full Stack." />
+         <SectionHeader num="02" eyebrow="About" title="From Mechatronics — To Full Stack." />
         <div className="grid grid-cols-12 gap-6 hard-all">
           <p className="reveal col-span-12 md:col-span-8 p-8 md:p-12 md:hard-r font-display text-2xl md:text-4xl leading-[1.05]">
-            Engineer at heart. I care more about <span className="text-[color:var(--accent-red)]">what's happening under the hood</span> than which library gets the credit.
+             {t("Engineer at heart. I care more about")} <span className="text-[color:var(--accent-red)]">{t("what's happening under the hood")}</span> {t("than which library gets the credit.")}
           </p>
           <ul className="reveal col-span-12 md:col-span-4">
             {bullets.map((b, i) => (
@@ -361,7 +490,7 @@ function About() {
                 <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--accent-red)]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="text-base font-bold uppercase">{b}</span>
+                 <span className="text-base font-bold uppercase">{t(b)}</span>
               </li>
             ))}
           </ul>
@@ -382,6 +511,7 @@ const STACK: Record<string, string[]> = {
 };
 
 function Stack() {
+  const { t } = useLanguage();
   const marquee = Object.values(STACK).flat();
   const track = [...marquee, ...marquee, ...marquee];
   return (
@@ -393,14 +523,14 @@ function Stack() {
           {Object.entries(STACK).map(([group, items], gi) => (
             <div key={group} className={`p-6 md:p-8 ${gi % 3 !== 2 ? "lg:hard-r" : ""} ${gi % 2 !== 1 ? "md:hard-r lg:[&]:hard-r" : ""} hard-b`}>
               <div className="flex items-baseline justify-between mb-5">
-                <div className="font-display text-xl md:text-2xl">{group}</div>
+               <div className="font-display text-xl md:text-2xl">{t(group)}</div>
                 <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
                   {String(gi + 1).padStart(2, "0")}/{String(Object.keys(STACK).length).padStart(2, "0")}
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
                 {items.map((it, ii) => (
-                  <span key={it} className={`chip ${ii === 0 ? "chip-solid" : ""}`}>{it}</span>
+                   <span key={it} className={`chip ${ii === 0 ? "chip-solid" : ""}`}>{t(it)}</span>
                 ))}
               </div>
             </div>
@@ -412,7 +542,7 @@ function Stack() {
         <div className="marquee-track flex gap-8 whitespace-nowrap font-display text-xl md:text-2xl tracking-tight">
           {track.map((t, i) => (
             <span key={i} className="inline-flex items-center gap-8">
-              <span>{t}</span>
+               <span>{useContext(LanguageContext).t(t)}</span>
               <span className="text-[color:var(--accent-cyan)]">■</span>
             </span>
           ))}
@@ -491,6 +621,7 @@ const EXPERIENCE: Exp[] = [
 ];
 
 function Experience() {
+  const { t } = useLanguage();
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section id="experience" className="relative py-20 md:py-28">
@@ -507,20 +638,20 @@ function Experience() {
                   className="group grid w-full grid-cols-12 items-baseline gap-4 md:gap-6 py-7 md:py-9 text-left transition-colors hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] px-2 md:px-4"
                 >
                   <div className="col-span-12 md:col-span-2 font-mono text-[10px] font-bold uppercase tracking-[0.28em]">
-                    {exp.dates}
+                     {t(exp.dates)}
                   </div>
                   <div className="col-span-12 md:col-span-8">
                     <div className="font-display text-xl md:text-3xl leading-[1.02]">
-                      {exp.role}
-                      <span className="text-[color:var(--accent-red)] group-hover:text-white"> — {exp.company}</span>
+                       {t(exp.role)}
+                       <span className="text-[color:var(--accent-red)] group-hover:text-white"> — {t(exp.company)}</span>
                     </div>
-                    <div className="mt-2 text-sm font-bold uppercase opacity-70">{exp.short}</div>
+                     <div className="mt-2 text-sm font-bold uppercase opacity-70">{t(exp.short)}</div>
                     <div
                       className="grid transition-all duration-500"
                       style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                     >
                       <div className="overflow-hidden">
-                        <p className="mt-4 max-w-2xl text-sm leading-relaxed opacity-90">{exp.detail}</p>
+                         <p className="mt-4 max-w-2xl text-sm leading-relaxed opacity-90">{t(exp.detail)}</p>
                       </div>
                     </div>
                   </div>
@@ -583,6 +714,7 @@ const PROJECTS: Project[] = [
 ];
 
 function ProjectRow({ p, i }: { p: Project; i: number }) {
+  const { t } = useLanguage();
   const wrapper = (children: React.ReactNode) =>
     p.href ? (
       <a href={p.href} target="_blank" rel="noreferrer" className="block group cursor-pointer">{children}</a>
@@ -603,15 +735,15 @@ function ProjectRow({ p, i }: { p: Project; i: number }) {
           <div className="col-span-12 md:col-span-6 md:hard-r p-6 md:p-10 flex flex-col justify-between gap-6">
             <div>
               <h3 className="font-display text-3xl md:text-5xl leading-[0.9]">
-                <span className="gl" data-t={p.name}>{p.name}</span>
+                 <span className="gl" data-t={t(p.name)}>{t(p.name)}</span>
               </h3>
               {p.soon && (
                 <span className="mt-4 inline-flex items-center gap-2 chip chip-red !py-1">
-                  <span className="h-1.5 w-1.5 bg-white" /> Shipping Soon
+                   <span className="h-1.5 w-1.5 bg-white" /> {t("Shipping Soon")}
                 </span>
               )}
             </div>
-            <p className="text-base font-bold uppercase leading-tight opacity-80 max-w-md">{p.tag}</p>
+             <p className="text-base font-bold uppercase leading-tight opacity-80 max-w-md">{t(p.tag)}</p>
             <div className="flex flex-wrap gap-2">
               {p.tech.map((t) => (
                 <span key={t} className="chip !py-1 !px-2 !text-[10px] group-hover:bg-transparent group-hover:text-white group-hover:border-white">
@@ -621,7 +753,7 @@ function ProjectRow({ p, i }: { p: Project; i: number }) {
             </div>
           </div>
           <div className="col-span-12 md:col-span-5 relative overflow-hidden aspect-[4/3] md:aspect-auto bg-[color:var(--surface)]">
-            <img src={p.image} alt={`${p.name} preview`} loading="lazy" className="absolute inset-0 h-full w-full object-cover editorial-grayscale group-hover:scale-105 transition-transform duration-700" />
+             <img src={p.image} alt={`${t(p.name)} ${t("preview")}`} loading="lazy" className="absolute inset-0 h-full w-full object-cover editorial-grayscale group-hover:scale-105 transition-transform duration-700" />
             <span className="absolute top-4 right-4 grid h-12 w-12 place-items-center bg-white text-black group-hover:bg-[color:var(--accent-red)] group-hover:text-white transition-colors">
               <ArrowUpRight className="h-5 w-5 transition-transform group-hover:rotate-45" />
             </span>
@@ -651,6 +783,7 @@ function Projects() {
 /* ---------------- WordPress ---------------- */
 
 function WordPress() {
+  const { t } = useLanguage();
   const live = [
     { name: "Vida Creede", url: "vidaeattolive.com", href: "https://vidaeattolive.com", note: "Pre-order landing page for a Colorado trail-food café.", img: wpVida },
     { name: "JLO Consulting Group", url: "jloconsultinggroup.com", href: "https://jloconsultinggroup.com", note: "Immigration consulting site in Spanish with booking integration.", img: wpJlo },
@@ -677,13 +810,13 @@ function WordPress() {
                   <span className="browser-chrome-url">{l.url}</span>
                 </div>
                 <div className="relative aspect-[16/10] overflow-hidden bg-[color:var(--background)]">
-                  <img src={l.img} alt={`${l.name} site preview`} loading="lazy" className="h-full w-full object-cover object-top editorial-grayscale" />
+                   <img src={l.img} alt={`${l.name} ${t("site preview")}`} loading="lazy" className="h-full w-full object-cover object-top editorial-grayscale" />
                 </div>
               </div>
               <div className="mt-5 flex items-start justify-between gap-6">
                 <div>
                   <h3 className="font-display text-3xl italic">{l.name}</h3>
-                  <p className="mt-2 text-sm text-[color:var(--muted-foreground)]">{l.note}</p>
+                   <p className="mt-2 text-sm text-[color:var(--muted-foreground)]">{t(l.note)}</p>
                 </div>
                 <ExternalLink className="mt-1 h-5 w-5 text-[color:var(--muted-foreground)] transition-colors group-hover:text-[color:var(--foreground)]" />
               </div>
@@ -699,10 +832,10 @@ function WordPress() {
             className="reveal group block hard-all"
           >
             <div className="relative aspect-[16/9] overflow-hidden bg-[color:var(--background)] hard-b">
-              <img src={behanceImg} alt="Michael Sanabria Behance profile preview" loading="lazy" width={1920} height={1000} className="h-full w-full object-cover object-top" />
+               <img src={behanceImg} alt={t("Michael Sanabria Behance profile preview")} loading="lazy" width={1920} height={1000} className="h-full w-full object-cover object-top" />
             </div>
             <div className="flex items-center justify-between gap-4 p-5 md:p-6">
-              <h3 className="font-display text-base md:text-lg">See my web builder works on my Behance page</h3>
+               <h3 className="font-display text-base md:text-lg">{t("See my web builder works on my Behance page")}</h3>
               <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform group-hover:rotate-45" />
             </div>
           </a>
@@ -715,25 +848,26 @@ function WordPress() {
 /* ---------------- Contact + Footer ---------------- */
 
 function Contact() {
+  const { t } = useLanguage();
   return (
     <section id="contact" className="relative py-24 md:py-32 bg-[color:var(--foreground)] text-[color:var(--background)]">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="reveal flex items-center gap-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--background)]">
-          <span className="chip chip-red !px-2 !py-1 !text-[10px]">07</span> Contact
+           <span className="chip chip-red !px-2 !py-1 !text-[10px]">07</span> {t("Contact")}
         </div>
         <h2 className="reveal mt-8 font-display text-[clamp(2rem,6.5vw,5.5rem)] leading-[0.85]">
-          <span className="gl" data-t="Ready For The">Ready For The</span><br />
-          <span className="gl text-[color:var(--accent-red)]" data-t="Next Iteration?">Next Iteration?</span>
+           <span className="gl" data-t={t("Ready For The")}>{t("Ready For The")}</span><br />
+           <span className="gl text-[color:var(--accent-red)]" data-t={t("Next Iteration?")}>{t("Next Iteration?")}</span>
         </h2>
 
         <div className="reveal mt-14 grid grid-cols-12 gap-6 border-t-2 border-[color:var(--background)] pt-10">
           <div className="col-span-12 md:col-span-7 space-y-3">
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--background)]/60">Email</div>
+             <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--background)]/60">{t("Email")}</div>
             <a data-cta href="mailto:maicolsana12@gmail.com" className="block font-display text-xl md:text-3xl hover:text-[color:var(--accent-red)] transition-colors">
               maicolsana12@gmail.com
             </a>
             <a data-cta href="mailto:maicolsana12@gmail.com" className="btn-fill fill-blue mt-8 inline-flex items-center gap-3 chip chip-red text-base !px-8 !py-4">
-              <span className="inline-flex items-center gap-3">Get In Touch <ArrowUpRight className="h-4 w-4" /></span>
+               <span className="inline-flex items-center gap-3">{t("Get In Touch")} <ArrowUpRight className="h-4 w-4" /></span>
             </a>
           </div>
           <div className="col-span-12 md:col-span-5 flex flex-col gap-3 justify-end font-mono text-[11px] font-bold uppercase tracking-[0.28em]">
@@ -750,7 +884,7 @@ function Contact() {
               <ArrowUpRight className="ml-auto h-4 w-4 transition-transform group-hover:rotate-45" />
             </a>
             <a data-cta href="mailto:maicolsana12@gmail.com" className="group inline-flex items-center gap-3 border-2 border-[color:var(--background)]/30 hover:border-[color:var(--accent-red)] hover:bg-[color:var(--accent-red)] px-5 py-4 transition-colors">
-              <Mail className="h-4 w-4" /> Send Email
+               <Mail className="h-4 w-4" /> {t("Send Email")}
               <ArrowUpRight className="ml-auto h-4 w-4 transition-transform group-hover:rotate-45" />
             </a>
           </div>
@@ -762,7 +896,7 @@ function Contact() {
 
 /* ---------------- Page ---------------- */
 
-export function PortfolioPage() {
+function PortfolioContent() {
   useReveal();
   useGlitch();
   return (
@@ -779,5 +913,30 @@ export function PortfolioPage() {
         <Contact />
       </main>
     </div>
+  );
+}
+
+export function PortfolioPage() {
+  const [language, setLanguage] = useState<Language>("en");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("language");
+    if (saved === "es" || saved === "en") setLanguage(saved);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    localStorage.setItem("language", language);
+    document.title = language === "es"
+      ? "Michael Sanabria — Desarrollador Full Stack IA JS/TS"
+      : "Michael Sanabria — Full Stack AI JS/TS Developer";
+  }, [language]);
+
+  const t = (text: string) => language === "es" ? (ES[text] ?? text) : text;
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      <PortfolioContent />
+    </LanguageContext.Provider>
   );
 }
