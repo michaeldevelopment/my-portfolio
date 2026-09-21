@@ -11,22 +11,34 @@ import {
   MapPin,
   Sun,
   Moon,
+  ChevronLeft,
+  ChevronRight,
+  X,
 } from "lucide-react";
 
 import heroImg from "@/assets/hero-centerpiece.jpg";
-import projQuick from "@/assets/project-quick.jpg";
-import projWayki from "@/assets/project-wayki.jpg";
 import projEcom from "@/assets/project-ecommerce.jpg";
 import projMovies from "@/assets/project-movies.jpg";
 import wpVida from "@/assets/wp-vida-creede.png";
 import wpJlo from "@/assets/wp-jlo.png";
 import behanceImg from "@/assets/behance-preview.jpg";
+import ccpAdminDashboardLight from "@/assets/ccp/ccp.onlyonecoaching.com-admin-dashboard-light-mode.png.asset.json";
+import ccpAdminDashboard from "@/assets/ccp/ccp.onlyonecoaching.com-admin-dashboard.png.asset.json";
+import ccpAdminStudents from "@/assets/ccp/ccp.onlyonecoaching.com-admin-estudiantes.png.asset.json";
+import ccpAdminModules from "@/assets/ccp/ccp.onlyonecoaching.com-admin-modulos.png.asset.json";
+import ccpAdminPending from "@/assets/ccp/ccp.onlyonecoaching.com-admin-reasignacion.png.asset.json";
+import ccpClass from "@/assets/ccp/ccp.onlyonecoaching.com-clase.png.asset.json";
+import ccpLogin from "@/assets/ccp/ccp.onlyonecoaching.com-login.png.asset.json";
+import ccpModuleTwo from "@/assets/ccp/ccp.onlyonecoaching.com-modulo-2.png.asset.json";
+import ccpModuleLight from "@/assets/ccp/ccp.onlyonecoaching.com-modulo-light-mode.png.asset.json";
+import ccpModule from "@/assets/ccp/ccp.onlyonecoaching.com-modulo.png.asset.json";
 
 type Language = "en" | "es";
 
 const ES: Record<string, string> = {
-  Work: "Proyectos",
+  Work: "Trabajo",
   About: "Sobre mí",
+  Projects: "Proyectos",
   Experience: "Experiencia",
   Contact: "Contacto",
   "Toggle theme": "Cambiar tema",
@@ -96,9 +108,14 @@ const ES: Record<string, string> = {
   "Balanced fast turnaround with consistent quality across a portfolio of client sites.": "Equilibré entregas rápidas con calidad consistente en un portafolio de sitios para clientes.",
   "Featured Work": "Trabajo destacado",
   "Selected Projects.": "Proyectos seleccionados.",
-  "Five builds. The work is the argument.": "Cuatro proyectos. El trabajo es el argumento.",
-  "Full CRUD recipe app with favorites and a premium payment tier.": "Aplicación de recetas con CRUD, favoritos y un plan premium.",
-  "Helps missing pets find their way home with maps and geolocation.": "Ayuda a mascotas perdidas a volver a casa con mapas y geolocalización.",
+  "Three builds. The work is the argument.": "Tres proyectos. El trabajo es el argumento.",
+  "Private LMS platform for a sequential coaching program.": "LMS privado para un programa de coaching secuencial.",
+  "More Info": "Más info",
+  "Close CCP details": "Cerrar detalles de CCP",
+  "Previous image": "Imagen anterior",
+  "Next image": "Siguiente imagen",
+  "CCP Platform": "Plataforma CCP",
+  "Plataforma CCP es un LMS privado para \"Centro de Crecimiento Personal\", un programa de coaching de desarrollo personal estructurado en módulos secuenciales. La plataforma gestiona cohortes de estudiantes con desbloqueo progresivo de contenido, clases en video (Vimeo) y texto, publicación programada de clases, y un sistema de reasignación automática al completar el programa. Incluye tres roles diferenciados (estudiante, profesor, coach) con paneles de administración completos para gestión de grupos, módulos, estudiantes y seguimiento de progreso. Desarrollada con React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui en el frontend, consumiendo una API REST con autenticación JWT y refresco de token automático.": "Plataforma CCP es un LMS privado para \"Centro de Crecimiento Personal\", un programa de coaching de desarrollo personal estructurado en módulos secuenciales. La plataforma gestiona cohortes de estudiantes con desbloqueo progresivo de contenido, clases en video (Vimeo) y texto, publicación programada de clases, y un sistema de reasignación automática al completar el programa. Incluye tres roles diferenciados (estudiante, profesor, coach) con paneles de administración completos para gestión de grupos, módulos, estudiantes y seguimiento de progreso. Desarrollada con React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui en el frontend, consumiendo una API REST con autenticación JWT y refresco de token automático.",
   "E-commerce app": "Aplicación e-commerce",
   "Storefront with a full checkout flow.": "Tienda con un flujo de pago completo.",
   "Entertainment hub": "Centro de entretenimiento",
@@ -244,7 +261,7 @@ function useGlitch() {
 const SECTIONS = [
   { id: "work", label: "Work", num: "01" },
   { id: "about", label: "About", num: "02" },
-  { id: "stack", label: "Stack", num: "03" },
+  { id: "wordpress", label: "Projects", num: "03" },
   { id: "experience", label: "Experience", num: "04" },
   { id: "contact", label: "Contact", num: "05" },
 ];
@@ -381,12 +398,6 @@ function Hero() {
                <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)] mb-2">{t("Location")}</div>
               <div className="font-display text-2xl leading-none flex items-center gap-2"><MapPin className="h-5 w-5" /> Colombia</div>
               <div className="font-mono text-[11px] font-bold uppercase mt-1">UTC−5</div>
-            </div>
-            <div>
-               <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--muted-foreground)] mb-2">{t("Status")}</div>
-              <div className="inline-flex items-center gap-2 chip chip-red">
-                 <span className="h-2 w-2 bg-white animate-pulse" /> {t("Available Now")}
-              </div>
             </div>
           </div>
           <div className="reveal relative aspect-square lg:aspect-auto lg:flex-1 overflow-hidden bg-[color:var(--surface)]">
@@ -680,23 +691,35 @@ type Project = {
   chrome?: { url: string };
   href?: string;
   soon?: boolean;
+  details?: string;
+  modal?: boolean;
 };
+
+const CCP_DETAILS_ES = "Plataforma CCP es un LMS privado para \"Centro de Crecimiento Personal\", un programa de coaching de desarrollo personal estructurado en módulos secuenciales. La plataforma gestiona cohortes de estudiantes con desbloqueo progresivo de contenido, clases en video (Vimeo) y texto, publicación programada de clases, y un sistema de reasignación automática al completar el programa. Incluye tres roles diferenciados (estudiante, profesor, coach) con paneles de administración completos para gestión de grupos, módulos, estudiantes y seguimiento de progreso. Desarrollada con React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui en el frontend, consumiendo una API REST con autenticación JWT y refresco de token automático.";
+
+const CCP_DETAILS_EN = "CCP Platform is a private LMS for \"Centro de Crecimiento Personal\", a personal-growth coaching program structured around sequential modules. The platform manages student cohorts with progressive content unlocking, video (Vimeo) and text-based classes, scheduled publishing, and an automatic reassignment queue when students complete the program. It features three distinct roles (student, teacher, coach) with full admin dashboards for group management, module progression, student tracking, and progress analytics. Built with React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui on the frontend, consuming a REST API with JWT authentication and automatic token refresh.";
+
+const CCP_SHOTS = [
+  { src: ccpAdminDashboard.url, alt: "CCP admin dashboard" },
+  { src: ccpAdminDashboardLight.url, alt: "CCP admin dashboard light mode" },
+  { src: ccpAdminStudents.url, alt: "CCP student management dashboard" },
+  { src: ccpAdminModules.url, alt: "CCP module administration" },
+  { src: ccpAdminPending.url, alt: "CCP pending reassignment queue" },
+  { src: ccpLogin.url, alt: "CCP login screen" },
+  { src: ccpModule.url, alt: "CCP student module view" },
+  { src: ccpModuleLight.url, alt: "CCP student module view light mode" },
+  { src: ccpModuleTwo.url, alt: "CCP second student module view" },
+  { src: ccpClass.url, alt: "CCP class video screen" },
+];
 
 const PROJECTS: Project[] = [
   {
-    name: "Quick",
-    tag: "Full CRUD recipe app with favorites and a premium payment tier.",
-    tech: ["React", "Redux", "Node.js", "MongoDB", "ePayco", "Cypress"],
-    image: projQuick,
-    href: "https://github.com/michaeldevelopment",
-  },
-  {
-    name: "Wayki",
-    tag: "Helps missing pets find their way home with maps and geolocation.",
-    tech: ["React", "Node.js", "MongoDB", "JWT", "Google Maps"],
-    image: projWayki,
-    chrome: { url: "festive-turing-3a0437.netlify.app" },
-    href: "https://festive-turing-3a0437.netlify.app",
+    name: "CCP",
+    tag: "Private LMS platform for a sequential coaching program.",
+    tech: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui", "REST API", "JWT"],
+    image: ccpAdminDashboard.url,
+    details: CCP_DETAILS_EN,
+    modal: true,
   },
   {
     name: "E-commerce app",
@@ -713,10 +736,148 @@ const PROJECTS: Project[] = [
   },
 ];
 
-function ProjectRow({ p, i }: { p: Project; i: number }) {
+function CcpModal({ onClose }: { onClose: () => void }) {
+  const { language, t } = useLanguage();
+  const [current, setCurrent] = useState(0);
+  const active = CCP_SHOTS[current];
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+      if (event.key === "ArrowLeft") setCurrent((value) => (value - 1 + CCP_SHOTS.length) % CCP_SHOTS.length);
+      if (event.key === "ArrowRight") setCurrent((value) => (value + 1) % CCP_SHOTS.length);
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  const previous = () => setCurrent((value) => (value - 1 + CCP_SHOTS.length) % CCP_SHOTS.length);
+  const next = () => setCurrent((value) => (value + 1) % CCP_SHOTS.length);
+
+  if (!active) return null;
+
+  return (
+    <div className="fixed inset-0 z-[90] overflow-y-auto bg-background/95 text-foreground backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={t("CCP Platform")}>
+      <button type="button" aria-label={t("Close CCP details")} onClick={onClose} className="fixed right-4 top-4 z-[100] grid h-11 w-11 place-items-center border-2 border-[color:var(--foreground)] bg-[color:var(--background)] transition-colors hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)]">
+        <X className="h-5 w-5" />
+      </button>
+
+      <div className="mx-auto grid min-h-screen max-w-[1600px] grid-cols-12 gap-0 px-4 py-20 md:px-8">
+        <div className="col-span-12 lg:col-span-4 lg:hard-r lg:pr-8">
+          <div className="sticky top-20">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--accent-red)]">Selected Project</div>
+            <h3 className="mt-5 font-display text-[clamp(2.75rem,8vw,7rem)] leading-[0.82]">
+              <span className="gl" data-t="CCP">CCP</span>
+            </h3>
+            <p className="mt-8 max-w-xl text-sm font-bold uppercase leading-relaxed md:text-base">
+              {language === "es" ? CCP_DETAILS_ES : CCP_DETAILS_EN}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {PROJECTS[0]?.tech.map((item) => (
+                <span key={item} className="chip !px-2 !py-1 !text-[10px]">{item}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="col-span-12 mt-10 lg:col-span-8 lg:mt-0 lg:pl-8">
+          <div className="browser-chrome reveal is-visible">
+            <div className="browser-chrome-bar">
+              <span className="browser-chrome-dot" />
+              <span className="browser-chrome-dot" />
+              <span className="browser-chrome-dot" />
+              <span className="browser-chrome-url">ccp.onlyonecoaching.com</span>
+            </div>
+            <div className="relative aspect-[16/9] overflow-hidden bg-[color:var(--surface)]">
+              <img src={active.src} alt={active.alt} className="h-full w-full object-cover object-top" />
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+                <button type="button" aria-label={t("Previous image")} onClick={previous} className="grid h-11 w-11 place-items-center border-2 border-[color:var(--foreground)] bg-[color:var(--background)] text-[color:var(--foreground)] transition-colors hover:bg-[color:var(--accent-red)] hover:text-white">
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <div className="border-2 border-[color:var(--foreground)] bg-[color:var(--background)] px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[color:var(--foreground)]">
+                  {String(current + 1).padStart(2, "0")}/{String(CCP_SHOTS.length).padStart(2, "0")}
+                </div>
+                <button type="button" aria-label={t("Next image")} onClick={next} className="grid h-11 w-11 place-items-center border-2 border-[color:var(--foreground)] bg-[color:var(--background)] text-[color:var(--foreground)] transition-colors hover:bg-[color:var(--accent-red)] hover:text-white">
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-5 gap-3 md:grid-cols-10">
+            {CCP_SHOTS.map((shot, index) => (
+              <button
+                key={shot.src}
+                type="button"
+                onClick={() => setCurrent(index)}
+                aria-label={`${t("CCP Platform")} ${index + 1}`}
+                className={`aspect-video overflow-hidden border-2 transition-colors ${index === current ? "border-[color:var(--accent-red)]" : "border-[color:var(--foreground)] opacity-60 hover:opacity-100"}`}
+              >
+                <img src={shot.src} alt="" className="h-full w-full object-cover object-top" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectRow({ p, i, onOpen }: { p: Project; i: number; onOpen: () => void }) {
   const { t } = useLanguage();
+  const content = (
+    <div className="relative grid grid-cols-12 items-stretch transition-colors group-hover:bg-[color:var(--foreground)] group-hover:text-[color:var(--background)]">
+      <div className="col-span-12 md:col-span-1 md:hard-r flex md:flex-col items-center md:items-start justify-between md:justify-start p-4 md:p-6 gap-2">
+        <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em]">
+          N° {String(i + 1).padStart(2, "0")}
+        </div>
+        <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] opacity-60">2024</div>
+      </div>
+      <div className="col-span-12 md:col-span-6 md:hard-r p-6 md:p-10 flex flex-col justify-between gap-6">
+        <div>
+          <h3 className="font-display text-3xl md:text-5xl leading-[0.9]">
+            <span className="gl" data-t={t(p.name)}>{t(p.name)}</span>
+          </h3>
+          {p.soon && (
+            <span className="mt-4 inline-flex items-center gap-2 chip chip-red !py-1">
+              <span className="h-1.5 w-1.5 bg-white" /> {t("Shipping Soon")}
+            </span>
+          )}
+          {p.modal && (
+            <button type="button" onClick={onOpen} data-cta className="btn-fill fill-blue mt-5 inline-flex items-center gap-3 chip chip-solid">
+              <span className="inline-flex items-center gap-3">
+                {t("More Info")}
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </span>
+            </button>
+          )}
+        </div>
+        <p className="text-base font-bold uppercase leading-tight opacity-80 max-w-md">{t(p.tag)}</p>
+        <div className="flex flex-wrap gap-2">
+          {p.tech.map((tech) => (
+            <span key={tech} className="chip !py-1 !px-2 !text-[10px] group-hover:bg-transparent group-hover:text-white group-hover:border-white">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="col-span-12 md:col-span-5 relative overflow-hidden aspect-[4/3] md:aspect-auto bg-[color:var(--surface)]">
+        <img src={p.image} alt={`${t(p.name)} ${t("preview")}`} loading="lazy" className="absolute inset-0 h-full w-full object-cover object-top editorial-grayscale group-hover:scale-105 transition-transform duration-700" />
+        <span className="absolute top-4 right-4 grid h-12 w-12 place-items-center bg-white text-black group-hover:bg-[color:var(--accent-red)] group-hover:text-white transition-colors">
+          <ArrowUpRight className="h-5 w-5 transition-transform group-hover:rotate-45" />
+        </span>
+      </div>
+    </div>
+  );
+
   const wrapper = (children: ReactNode) =>
-    p.href ? (
+    p.modal ? (
+      <button type="button" onClick={onOpen} className="block w-full group cursor-pointer text-left">{children}</button>
+    ) : p.href ? (
       <a href={p.href} target="_blank" rel="noreferrer" className="block group cursor-pointer">{children}</a>
     ) : (
       <div className="group">{children}</div>
@@ -724,58 +885,25 @@ function ProjectRow({ p, i }: { p: Project; i: number }) {
 
   return (
     <li className="reveal hard-b">
-      {wrapper(
-        <div className="relative grid grid-cols-12 items-stretch transition-colors group-hover:bg-[color:var(--foreground)] group-hover:text-[color:var(--background)]">
-          <div className="col-span-12 md:col-span-1 md:hard-r flex md:flex-col items-center md:items-start justify-between md:justify-start p-4 md:p-6 gap-2">
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em]">
-              N° {String(i + 1).padStart(2, "0")}
-            </div>
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] opacity-60">2024</div>
-          </div>
-          <div className="col-span-12 md:col-span-6 md:hard-r p-6 md:p-10 flex flex-col justify-between gap-6">
-            <div>
-              <h3 className="font-display text-3xl md:text-5xl leading-[0.9]">
-                 <span className="gl" data-t={t(p.name)}>{t(p.name)}</span>
-              </h3>
-              {p.soon && (
-                <span className="mt-4 inline-flex items-center gap-2 chip chip-red !py-1">
-                   <span className="h-1.5 w-1.5 bg-white" /> {t("Shipping Soon")}
-                </span>
-              )}
-            </div>
-             <p className="text-base font-bold uppercase leading-tight opacity-80 max-w-md">{t(p.tag)}</p>
-            <div className="flex flex-wrap gap-2">
-              {p.tech.map((t) => (
-                <span key={t} className="chip !py-1 !px-2 !text-[10px] group-hover:bg-transparent group-hover:text-white group-hover:border-white">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="col-span-12 md:col-span-5 relative overflow-hidden aspect-[4/3] md:aspect-auto bg-[color:var(--surface)]">
-             <img src={p.image} alt={`${t(p.name)} ${t("preview")}`} loading="lazy" className="absolute inset-0 h-full w-full object-cover editorial-grayscale group-hover:scale-105 transition-transform duration-700" />
-            <span className="absolute top-4 right-4 grid h-12 w-12 place-items-center bg-white text-black group-hover:bg-[color:var(--accent-red)] group-hover:text-white transition-colors">
-              <ArrowUpRight className="h-5 w-5 transition-transform group-hover:rotate-45" />
-            </span>
-          </div>
-        </div>,
-      )}
+      {wrapper(content)}
     </li>
   );
 }
 
 function Projects() {
+  const [ccpOpen, setCcpOpen] = useState(false);
   return (
-    <section id="work" className="relative py-16 md:py-24">
+    <section id="work" className="relative py-20 md:py-28">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="01" eyebrow="Featured Work" title="Selected Projects." kicker="Five builds. The work is the argument." />
+        <SectionHeader num="02" eyebrow="Featured Work" title="Selected Projects." kicker="Three builds. The work is the argument." />
 
         <ul className="border-t-2 border-[color:var(--foreground)] border-x-2">
           {PROJECTS.map((p, i) => (
-            <ProjectRow key={p.name} p={p} i={i} />
+            <ProjectRow key={p.name} p={p} i={i} onOpen={() => setCcpOpen(true)} />
           ))}
         </ul>
       </div>
+      {ccpOpen && <CcpModal onClose={() => setCcpOpen(false)} />}
     </section>
   );
 }
@@ -789,9 +917,9 @@ function WordPress() {
     { name: "JLO Consulting Group", url: "jloconsultinggroup.com", href: "https://jloconsultinggroup.com", note: "Immigration consulting site in Spanish with booking integration.", img: wpJlo },
   ];
   return (
-    <section id="wordpress" className="relative py-20 md:py-28 bg-[color:var(--surface)]">
+    <section id="wordpress" className="relative py-16 md:py-24 bg-[color:var(--surface)]">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="05" eyebrow="WordPress & Divi" title="Client Sites." kicker="Live picks + Behance." />
+        <SectionHeader num="01" eyebrow="WordPress & Divi" title="Client Sites." kicker="Live picks + Behance." />
 
         <div className="grid gap-10 md:grid-cols-2">
           {live.map((l) => (
@@ -853,7 +981,7 @@ function Contact() {
     <section id="contact" className="relative py-24 md:py-32 bg-[color:var(--foreground)] text-[color:var(--background)]">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="reveal flex items-center gap-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--background)]">
-           <span className="chip chip-red !px-2 !py-1 !text-[10px]">07</span> {t("Contact")}
+           <span className="chip chip-red !px-2 !py-1 !text-[10px]">06</span> {t("Contact")}
         </div>
         <h2 className="reveal mt-8 font-display text-[clamp(2rem,6.5vw,5.5rem)] leading-[0.85]">
            <span className="gl" data-t={t("Ready For The")}>{t("Ready For The")}</span><br />
@@ -905,11 +1033,11 @@ function PortfolioContent() {
       <Nav />
       <main>
         <Hero />
+        <WordPress />
         <Projects />
         <About />
         <Stack />
         <Experience />
-        <WordPress />
         <Contact />
       </main>
     </div>
