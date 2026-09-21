@@ -1,9 +1,11 @@
 # Selector de idioma inglés / español
 
 ## Objetivo
+
 Añadir un cambio de idioma ES/EN a toda la página sin modificar su estructura, tamaños, colores, animaciones ni distribución visual.
 
 ## Implementación
+
 - Crear un catálogo interno con todas las frases visibles en inglés y su traducción al español.
 - Mantener nombres propios, marcas y tecnologías sin traducir.
 - Añadir un selector compacto `EN / ES` junto al control de tema en la barra superior.
@@ -13,6 +15,7 @@ Añadir un cambio de idioma ES/EN a toda la página sin modificar su estructura,
 - Mantener exactamente las mismas clases, imágenes, enlaces, orden de secciones y efectos visuales para que solo cambie el contenido textual.
 
 ## Validación
+
 - Comprobar que todos los textos cambian en ambos sentidos.
 - Verificar que el diseño no se desplaza ni se rompe en escritorio y móvil.
 - Confirmar que tema claro/oscuro, navegación, acordeones, enlaces y animaciones siguen funcionando.

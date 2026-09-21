@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -34,12 +35,13 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
+  const err = error instanceof Error ? error : new Error(String(error));
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
+    reportLovableError(err, { boundary: "tanstack_root_error_component" });
+  }, [err]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -78,10 +80,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Michael Sanabria — Full Stack AI JS/TS Developer" },
-      { name: "description", content: "Michael Sanabria builds AI-native full stack web apps with React, Next.js and Node.js. Based in Medellín, Colombia." },
+      {
+        name: "description",
+        content:
+          "Michael Sanabria builds AI-native full stack web apps with React, Next.js and Node.js. Based in Medellín, Colombia.",
+      },
       { name: "author", content: "Michael Sanabria" },
       { property: "og:title", content: "Michael Sanabria — Full Stack AI JS/TS Developer" },
-      { property: "og:description", content: "AI-native full stack web apps: React, Next.js, Node.js, and agentic workflows." },
+      {
+        property: "og:description",
+        content: "AI-native full stack web apps: React, Next.js, Node.js, and agentic workflows.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
