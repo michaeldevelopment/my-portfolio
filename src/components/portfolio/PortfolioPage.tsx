@@ -35,7 +35,7 @@ const ES: Record<string, string> = {
   "Full Stack AI JS/TS Developer": "Desarrollador Full Stack IA JS/TS",
   "Portfolio 2026": "Portafolio 2026",
   "Full Stack": "Full Stack",
-  "AI Developer": "Desarrollador IA",
+  "AI Developer": "Desarrollo IA",
   "Building web apps that ship fast with AI in the loop.": "Construyendo aplicaciones web que se lanzan rápido con IA en el proceso.",
   "Explore Projects": "Explorar proyectos",
   "Download CV": "Descargar CV",
