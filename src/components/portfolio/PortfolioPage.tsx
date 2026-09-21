@@ -511,7 +511,7 @@ const STACK: Record<string, string[]> = {
 };
 
 function Stack() {
-  const { t } = useLanguage();
+  const { t: translate } = useLanguage();
   const marquee = Object.values(STACK).flat();
   const track = [...marquee, ...marquee, ...marquee];
   return (
@@ -523,14 +523,14 @@ function Stack() {
           {Object.entries(STACK).map(([group, items], gi) => (
             <div key={group} className={`p-6 md:p-8 ${gi % 3 !== 2 ? "lg:hard-r" : ""} ${gi % 2 !== 1 ? "md:hard-r lg:[&]:hard-r" : ""} hard-b`}>
               <div className="flex items-baseline justify-between mb-5">
-               <div className="font-display text-xl md:text-2xl">{t(group)}</div>
+               <div className="font-display text-xl md:text-2xl">{translate(group)}</div>
                 <div className="font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
                   {String(gi + 1).padStart(2, "0")}/{String(Object.keys(STACK).length).padStart(2, "0")}
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
                 {items.map((it, ii) => (
-                   <span key={it} className={`chip ${ii === 0 ? "chip-solid" : ""}`}>{t(it)}</span>
+                   <span key={it} className={`chip ${ii === 0 ? "chip-solid" : ""}`}>{translate(it)}</span>
                 ))}
               </div>
             </div>
@@ -540,9 +540,9 @@ function Stack() {
 
       <div className="reveal mt-16 overflow-hidden border-y-2 border-[color:var(--foreground)] py-4 bg-[color:var(--foreground)] text-[color:var(--background)]">
         <div className="marquee-track flex gap-8 whitespace-nowrap font-display text-xl md:text-2xl tracking-tight">
-          {track.map((t, i) => (
+           {track.map((item, i) => (
             <span key={i} className="inline-flex items-center gap-8">
-               <span>{useContext(LanguageContext).t(t)}</span>
+               <span>{translate(item)}</span>
               <span className="text-[color:var(--accent-cyan)]">■</span>
             </span>
           ))}
@@ -715,7 +715,7 @@ const PROJECTS: Project[] = [
 
 function ProjectRow({ p, i }: { p: Project; i: number }) {
   const { t } = useLanguage();
-  const wrapper = (children: React.ReactNode) =>
+  const wrapper = (children: ReactNode) =>
     p.href ? (
       <a href={p.href} target="_blank" rel="noreferrer" className="block group cursor-pointer">{children}</a>
     ) : (
