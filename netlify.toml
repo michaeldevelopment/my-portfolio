@@ -3,12 +3,11 @@
 # and the static assets into dist/ (Netlify picks both up automatically).
 
 [build]
-  command = "npm run build"
+  command = "pnpm run build:netlify"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "22"
-  # Tells vite.config.ts which Nitro deploy target to build for.
   NITRO_PRESET = "netlify"
 
 [[headers]]
