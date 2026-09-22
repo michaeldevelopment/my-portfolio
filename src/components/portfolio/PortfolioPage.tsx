@@ -78,14 +78,17 @@ const ES: Record<string, string> = {
   Language: "Idioma",
   "Your idea, in production.": "Tu idea, en producción.",
   "No shortcuts. No fluff.": "Sin atajos. Sin relleno.",
-  "From Mechatronics — To Full Stack.": "De la ingeniería mecatrónica al código full stack.",
-  "Engineer at heart. I care more about": "Ingeniero de corazón. Me interesa mucho más",
+  "I care more about": "Me interesa mucho más",
   "what's happening under the hood": "el por qué, más que el qué y el cómo.",
   "than which library gets the credit.": "Raíces sólidas, proyectos sólidos",
-  "Mechatronics roots": "Raíces en mecatrónica",
+  "Quality and commitment": "Calidad y compromiso",
+  "Turning sharp, pressing pain points into tech solutions":
+    "Conversión de puntos de dolor agudos y punzantes en soluciones tecnológicas",
+  "Curiosity and passion": "Curiosidad y pasión",
+  "Engineering roots": "Raíces en ingeniería",
   "Full stack shipper": "Entregas full stack",
   "AI-native workflows": "Flujos nativos con IA",
-  "Ships under load": "Páginas web",
+  "Web pages and apps": "Páginas y apps web",
   "Core Stack.": "Stack principal.",
   "Pragmatic, JS/TS-heavy, AI in the loop.": "Pragmático, enfocado en JS/TS y con IA en el flujo.",
   Frontend: "Frontend",
@@ -409,19 +412,19 @@ function Hero() {
     <section id="top" className="relative overflow-hidden pt-28 md:pt-32 hard-b">
       <div className="grid grid-cols-12">
         <div className="col-span-12 lg:col-span-7 pr-6 pl-8 md:pr-10 md:pl-20 lg:pl-28 py-16 md:py-24 lg:hard-r">
-          <p className="reveal font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--foreground)] mb-8 flex items-center gap-3">
+          <p className="reveal font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--foreground)] mb-8 hidden md:flex items-center gap-3">
             <span className="w-10 h-[2px] bg-[color:var(--foreground)]" />
             {t("Full Stack AI JS/TS Developer")}
             <span>/</span>
             {t("Portfolio 2026")}
           </p>
-          <h1 className="reveal font-display text-[clamp(2rem,7vw,5.75rem)] leading-[1.05]">
+          <h1 className="reveal font-display text-[clamp(2.6rem,7vw,5.75rem)] leading-[1.05]">
             <span className="gl" data-t={t("Your idea, in production.")}>
               {t("Your idea, in production.")}
             </span>
             <br />
             <span
-              className="gl inline-block mt-3 text-[clamp(1.4rem,4.6vw,3.5rem)] text-[color:var(--accent-red)]"
+              className="gl inline-block mt-3 text-[clamp(1.9rem,4.6vw,3.5rem)] text-[color:var(--accent-red)]"
               data-t={t("No shortcuts. No fluff.")}
             >
               {t("No shortcuts. No fluff.")}
@@ -532,7 +535,7 @@ function SectionHeader({
 }: {
   num: string;
   eyebrow: string;
-  title: string;
+  title?: string;
   kicker?: string;
 }) {
   const { t } = useLanguage();
@@ -543,11 +546,13 @@ function SectionHeader({
           <span className="chip chip-red !px-2 !py-1 !text-[10px]">{num}</span>
           {t(eyebrow)}
         </div>
-        <h2 className="reveal mt-6 font-display text-[clamp(1.75rem,4.8vw,3.75rem)] leading-[0.88]">
-          <span className="gl" data-t={t(title)}>
-            {t(title)}
-          </span>
-        </h2>
+        {title && (
+          <h2 className="reveal mt-6 font-display text-[clamp(2.25rem,4.8vw,3.75rem)] leading-[0.88]">
+            <span className="gl" data-t={t(title)}>
+              {t(title)}
+            </span>
+          </h2>
+        )}
       </div>
       {kicker && (
         <p className="reveal col-span-12 md:col-span-4 max-w-sm text-base md:text-lg font-bold uppercase leading-tight">
@@ -563,18 +568,21 @@ function SectionHeader({
 function About() {
   const { t } = useLanguage();
   const bullets = [
-    "Mechatronics roots",
+    "Quality and commitment",
+    "Turning sharp, pressing pain points into tech solutions",
+    "Curiosity and passion",
+    "Engineering roots",
     "Full stack shipper",
     "AI-native workflows",
-    "Ships under load",
+    "Web pages and apps",
   ];
   return (
     <section id="about" className="relative py-20 md:py-28">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <SectionHeader num="02" eyebrow="About" title="From Mechatronics — To Full Stack." />
+        <SectionHeader num="02" eyebrow="About" />
         <div className="grid grid-cols-12 gap-6 hard-all">
           <p className="reveal col-span-12 md:col-span-8 p-8 md:p-12 md:hard-r font-display text-2xl md:text-4xl leading-[1.05]">
-            {t("Engineer at heart. I care more about")}{" "}
+            {t("I care more about")}{" "}
             <span className="text-[color:var(--accent-red)]">
               {t("what's happening under the hood")}
             </span>{" "}
@@ -836,7 +844,7 @@ const CCP_SHOTS = [
 
 const PROJECTS: Project[] = [
   {
-    name: "CCP",
+    name: "CCP Platform",
     tag: "Private LMS platform for a sequential coaching program.",
     tech: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui", "REST API", "JWT"],
     image: ccpAdminDashboard,
@@ -921,9 +929,9 @@ function CcpModal({ onClose }: { onClose: () => void }) {
             <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[color:var(--accent-red)]">
               Selected Project
             </div>
-            <h3 className="mt-5 font-display text-[clamp(2.75rem,8vw,7rem)] leading-[0.82]">
-              <span className="gl" data-t="CCP">
-                CCP
+            <h3 className="mt-5 font-display text-[clamp(2rem,7vw,4.5rem)] leading-[0.9]">
+              <span className="gl" data-t={t("CCP Platform")}>
+                {t("CCP Platform")}
               </span>
             </h3>
             <div className="mt-8 max-w-xl space-y-4 text-sm leading-relaxed text-[color:var(--foreground)]/85 md:text-base">
@@ -1008,7 +1016,7 @@ function ProjectRow({ p, i, onOpen }: { p: Project; i: number; onOpen: () => voi
       </div>
       <div className="col-span-12 md:col-span-6 md:hard-r p-6 md:p-10 flex flex-col justify-between gap-6">
         <div>
-          <h3 className="font-display text-3xl md:text-5xl leading-[0.9]">
+          <h3 className="font-display text-2xl md:text-5xl leading-[0.9]">
             <span className="gl" data-t={t(p.name)}>
               {t(p.name)}
             </span>
@@ -1180,7 +1188,7 @@ function WordPress() {
               </div>
               <div className="mt-5 flex items-start justify-between gap-6">
                 <div>
-                  <h3 className="font-display text-3xl italic">{l.name}</h3>
+                  <h3 className="font-display text-2xl md:text-3xl italic">{l.name}</h3>
                   <p className="mt-2 text-sm text-[color:var(--muted-foreground)]">{t(l.note)}</p>
                 </div>
                 <ExternalLink className="mt-1 h-5 w-5 text-[color:var(--muted-foreground)] transition-colors group-hover:text-[color:var(--foreground)]" />
