@@ -1,14 +1,14 @@
-# Netlify deployment config for this TanStack Start app.
-# Nitro's `netlify` preset builds the SSR handler into .netlify/functions-internal
-# and the static assets into dist/ (Netlify picks both up automatically).
-
 [build]
-  command = "pnpm run build:netlify"
+  command = "pnpm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "22"
-  NITRO_PRESET = "netlify"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [[headers]]
   for = "/assets/*"

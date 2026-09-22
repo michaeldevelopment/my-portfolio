@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+echo "Formateando con Prettier..."
+pnpm run format || exit 1
+git add -A
+
+echo "Verificando tipos (typecheck)..."
+pnpm run typecheck || exit 1
+
+echo "Ejecutando linter..."
+pnpm run lint || exit 1
+
+echo "Verificando build (vite build)..."
+pnpm run build || exit 1
+
+echo "Verificando build de Netlify..."
+pnpm exec netlify build --offline || exit 1
+
+echo "Pre-commit OK"
