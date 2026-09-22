@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   ArrowUpRight,
-  Download,
   Mail,
   ExternalLink,
   Plus,
@@ -40,6 +39,7 @@ import projWayki from "@/assets/project-wayki.jpg";
 import projMovies from "@/assets/project-movies.jpg";
 import wpVida from "@/assets/wp-vida-creede.png";
 import wpJlo from "@/assets/wp-jlo.png";
+import wpCamiloMaria from "@/assets/wp-camilo-maria.jpg";
 import behanceImg from "@/assets/behance-preview.jpg";
 import ccpAdminDashboardLight from "@/assets/ccp-screenshots/ccp.onlyonecoaching.com-admin-dashboard-light-mode.png";
 import ccpAdminDashboard from "@/assets/ccp-screenshots/ccp.onlyonecoaching.com-admin-dashboard.png";
@@ -172,6 +172,8 @@ const ES: Record<string, string> = {
     "Landing de pre-orders para un café de comida de senderismo en Colorado.",
   "Immigration consulting site in Spanish with booking integration.":
     "Sitio de consultoría migratoria en español con sistema de reservas integrado.",
+  "Animated wedding invitation with RSVP, gift registry and event details.":
+    "Invitación de boda animada con confirmación de asistencia, mesa de regalos y detalles del evento.",
   "site preview": "vista previa del sitio",
   "Michael Sanabria Behance profile preview":
     "Vista previa del perfil de Behance de Michael Sanabria",
@@ -477,7 +479,7 @@ function Hero() {
 
       <div className="reveal grid grid-cols-2 md:grid-cols-3 hard-t">
         <div className="p-6 md:p-8 hard-r">
-          <Stat value={3} suffix="+" label={t("Years shipping")} />
+          <Stat value={4} suffix="+" label={t("Years shipping")} />
         </div>
         <div className="p-6 md:p-8 md:hard-r">
           <Stat value={15} suffix="+" label={t("Projects")} />
@@ -1150,6 +1152,13 @@ function WordPress() {
       note: "Immigration consulting site in Spanish with booking integration.",
       img: wpJlo,
     },
+    {
+      name: "Cami y Majo",
+      url: "camiloymaria.com",
+      href: "https://camiloymaria.com",
+      note: "Animated wedding invitation with RSVP, gift registry and event details.",
+      img: wpCamiloMaria,
+    },
   ];
   return (
     <section id="projects" className="relative py-16 md:py-24 bg-[color:var(--surface)]">
@@ -1161,7 +1170,7 @@ function WordPress() {
           kicker="Live picks + Behance."
         />
 
-        <div className="grid gap-10 md:grid-cols-2">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           {live.map((l) => (
             <a
               key={l.name}
